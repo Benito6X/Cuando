@@ -663,6 +663,380 @@ body::after{opacity:.72;}
   .slot-row .del-btn{grid-column:1/-1;width:100%;border-radius:14px;}
 }
 
+
+/* ═══════════════════════════════════════════════════
+   CUÁNDO · HERO V7 + DARK/LIGHT MODE
+   Referencia aprobada: social, WhatsApp, resultado en vivo
+════════════════════════════════════════════════════ */
+.mode-shell{display:flex;align-items:center;gap:8px;}
+.mode-toggle{width:42px;height:42px;border-radius:15px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.075);color:var(--txt);display:grid;place-items:center;cursor:pointer;position:relative;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 12px 30px rgba(0,0,0,.18);transition:transform .24s var(--ease-spring),border-color .24s,background .24s,box-shadow .24s;}
+.mode-toggle:hover{border-color:var(--bdr-glow);box-shadow:0 0 0 4px var(--acc-dim),0 16px 34px rgba(0,0,0,.20);}
+.mode-toggle:active{transform:scale(.91) rotate(-8deg);}
+.mode-toggle span{font-size:1.05rem;line-height:1;filter:drop-shadow(0 0 10px var(--acc-glow));}
+
+body.light-mode{
+  --bg:#F7F8F0;--bg2:#FFFFFF;--card:#FFFFFF;--elev:#F0F2E8;--elev2:#E7EBDD;
+  --bdr:rgba(11,14,25,.075);--bdr-hi:rgba(11,14,25,.13);
+  --txt:#080A12;--txt2:#4E5362;--txt3:#787F91;--mut:#A7ADBA;
+  --shadow-sm:0 8px 24px rgba(24,28,42,.07);--shadow:0 24px 80px rgba(24,28,42,.12);--shadow-lg:0 28px 90px rgba(24,28,42,.18);
+  background:radial-gradient(circle at 50% -8%,rgba(203,255,0,.34),transparent 36%),radial-gradient(circle at 9% 20%,rgba(0,226,138,.10),transparent 30%),radial-gradient(circle at 94% 18%,rgba(0,212,255,.10),transparent 28%),linear-gradient(180deg,#FFFFFF 0%,#F7F8F0 100%)!important;
+  color:var(--txt);
+}
+body.light-mode::before{opacity:.020;mix-blend-mode:multiply;}
+body.light-mode::after{background:radial-gradient(ellipse at center,transparent 0 56%,rgba(150,160,135,.18) 100%);}
+body.light-mode .nav{background:rgba(255,255,255,.58)!important;border-bottom-color:rgba(8,10,18,.07)!important;color:var(--txt);}
+body.light-mode .nav.nav-float{background:rgba(255,255,255,.28)!important;}
+body.light-mode .nav.nav-float::before{background:rgba(255,255,255,.46);border-color:rgba(8,10,18,.08);}
+body.light-mode .wordmark{background:linear-gradient(135deg,#10131C 0%,var(--acc) 45%,#10131C 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+body.light-mode .lang-pill,.body-light .mode-toggle{background:rgba(255,255,255,.58);border-color:rgba(8,10,18,.08);}
+body.light-mode .lang-btn.on{background:#11131C;color:#fff;}
+body.light-mode input[type=text],body.light-mode input[type=date],body.light-mode input[type=time]{color-scheme:light;background:rgba(255,255,255,.76);}
+body.light-mode .btn-primary,body.light-mode .btn-hero{color:#080A12;}
+
+.home-page .view{max-width:1180px!important;width:100%;}
+.hero-v2{position:relative;overflow:hidden;min-height:calc(100svh - 70px);padding:34px 28px 44px;border-radius:0 0 34px 34px;isolation:isolate;}
+.hero-v2::before{content:'';position:absolute;inset:0;z-index:-4;background-image:url('./img/hero-bg.jpg');background-size:cover;background-position:center;opacity:.09;filter:saturate(1.05) contrast(1.08);}
+.hero-v2::after{content:'';position:absolute;inset:0;z-index:-3;background:radial-gradient(circle at 50% 14%,var(--acc-glow2),transparent 28%),radial-gradient(circle at 52% 54%,var(--acc-glow),transparent 24%),linear-gradient(180deg,rgba(0,0,0,.08),transparent 55%);pointer-events:none;}
+body.light-mode .hero-v2::before{opacity:.055;filter:saturate(.9) contrast(1.02);}
+body.light-mode .hero-v2::after{background:radial-gradient(circle at 50% 14%,rgba(203,255,0,.22),transparent 30%),radial-gradient(circle at 52% 54%,rgba(203,255,0,.18),transparent 25%),linear-gradient(180deg,rgba(255,255,255,.32),transparent 55%);}
+.hero-noise-grid{position:absolute;inset:0;z-index:-2;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse at 54% 35%,black 0 38%,transparent 78%);}
+body.light-mode .hero-noise-grid{background-image:linear-gradient(rgba(8,10,18,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(8,10,18,.045) 1px,transparent 1px);}
+.hero-confetti{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden;}
+.hero-confetti i{position:absolute;width:8px;height:14px;border-radius:3px;background:var(--acc);opacity:.55;filter:drop-shadow(0 0 10px var(--acc-glow));animation:heroConfetti 6.5s ease-in-out infinite;}
+.hero-confetti i:nth-child(1){left:17%;top:18%;animation-delay:.2s;transform:rotate(18deg)}.hero-confetti i:nth-child(2){left:31%;top:74%;animation-delay:.8s;transform:rotate(-22deg)}.hero-confetti i:nth-child(3){left:55%;top:16%;animation-delay:1.4s;transform:rotate(35deg)}.hero-confetti i:nth-child(4){left:78%;top:28%;animation-delay:2s;transform:rotate(-35deg)}.hero-confetti i:nth-child(5){left:88%;top:68%;animation-delay:2.7s;transform:rotate(8deg)}.hero-confetti i:nth-child(6){left:44%;top:52%;animation-delay:3.2s;transform:rotate(-12deg);background:#FFB000}.hero-confetti i:nth-child(7){left:68%;top:82%;animation-delay:3.9s}.hero-confetti i:nth-child(8){left:9%;top:62%;animation-delay:4.5s;background:#00E28A}
+@keyframes heroConfetti{0%,100%{translate:0 0;opacity:.20}50%{translate:0 -18px;opacity:.70}}
+.hero-shell{position:relative;z-index:1;display:grid;grid-template-columns:minmax(280px,1fr) minmax(290px,390px) minmax(230px,300px);gap:30px;align-items:center;min-height:calc(100svh - 154px);}
+.hero-copy{max-width:470px;}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;padding:8px 12px 8px 8px;border-radius:999px;border:1px solid var(--bdr-hi);background:rgba(255,255,255,.07);color:var(--txt2);font-size:.82rem;font-weight:800;box-shadow:inset 0 1px 0 rgba(255,255,255,.08);}
+.hero-badge strong{display:inline-flex;align-items:center;justify-content:center;min-height:26px;padding:0 11px;border-radius:999px;background:var(--acc);color:#080A12;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 0 24px var(--acc-glow);}
+body.light-mode .hero-badge{background:rgba(255,255,255,.72);}
+.hero-title-v2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(3.1rem,7vw,5.8rem);line-height:.90;letter-spacing:-.072em;margin:26px 0 22px;color:var(--txt);filter:drop-shadow(0 16px 40px rgba(0,0,0,.18));}
+.hero-title-v2 .accent{display:block;color:var(--acc);text-shadow:0 0 52px var(--acc-glow),0 0 118px var(--acc-glow2);}
+.hero-desc-v2{max-width:390px;color:var(--txt2);font-size:1.08rem;line-height:1.65;margin-bottom:26px;}
+.hero-actions-v2{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px;}
+.hero-actions-v2 .btn-hero{width:auto;min-width:230px;padding-inline:24px;}
+.hero-proof{display:flex;align-items:center;gap:14px;color:var(--txt2);font-size:.86rem;line-height:1.35;}
+.proof-stack{display:flex;align-items:center;}
+.proof-av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--bg);font-size:.72rem;font-weight:900;margin-left:-9px;background:linear-gradient(135deg,var(--acc),#00E28A);color:#08100D;box-shadow:0 8px 18px rgba(0,0,0,.22);}
+.proof-av:first-child{margin-left:0;}
+.proof-plus{padding:7px 10px;border-radius:999px;background:var(--acc);color:#080A12;font-size:.72rem;font-weight:900;margin-left:-6px;}
+
+.hero-phone-zone{position:relative;min-height:560px;display:grid;place-items:center;}
+.phone-glow{position:absolute;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle,var(--acc-glow),transparent 65%);filter:blur(12px);opacity:.82;animation:phoneGlow 4.4s ease-in-out infinite;}
+@keyframes phoneGlow{50%{transform:scale(1.09);opacity:1}}
+.phone-frame{position:relative;width:min(340px,86vw);border-radius:44px;padding:12px;background:linear-gradient(135deg,rgba(255,255,255,.42),rgba(255,255,255,.07) 24%,rgba(0,0,0,.72));box-shadow:0 34px 90px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.18),0 0 50px var(--acc-glow2);transform:rotate(1.5deg);}
+body.light-mode .phone-frame{background:linear-gradient(135deg,#fff,rgba(255,255,255,.72),rgba(20,24,35,.18));box-shadow:0 36px 80px rgba(20,24,42,.18),0 0 0 1px rgba(9,12,20,.12),0 0 54px rgba(203,255,0,.22);}
+.phone-screen{position:relative;border-radius:34px;min-height:525px;overflow:hidden;background:linear-gradient(180deg,#12131E,#07080E);border:1px solid rgba(255,255,255,.12);padding:22px 20px;color:#fff;}
+body.light-mode .phone-screen{background:linear-gradient(180deg,#FFFFFF,#F5F7EF);color:#080A12;border-color:rgba(8,10,20,.10);}
+.phone-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;color:inherit;opacity:.88;font-size:1.1rem;}
+.phone-menu{width:22px;height:14px;display:grid;gap:4px}.phone-menu span{height:2px;border-radius:99px;background:currentColor;}
+.phone-plan{font-weight:900;font-size:1.15rem;margin-bottom:4px;}.phone-sub{color:var(--txt2);font-size:.86rem;margin-bottom:12px;}.phone-live{position:absolute;right:20px;top:82px;font-size:.64rem;font-weight:900;color:#07100B;background:var(--acc);border-radius:999px;padding:6px 10px;box-shadow:0 0 28px var(--acc-glow);}
+.phone-winner{position:relative;margin:18px 0 18px;padding:18px;border-radius:22px;background:radial-gradient(circle at 82% 20%,var(--acc-glow2),transparent 36%),linear-gradient(180deg,var(--acc-dim),rgba(255,255,255,.035));border:1px solid var(--bdr-glow);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 16px 32px rgba(0,0,0,.18);}
+.phone-winner small{display:block;color:var(--acc);font-weight:900;margin-bottom:6px;}.phone-winner strong{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:2rem;line-height:1.0;letter-spacing:-.04em;}.crown{position:absolute;right:18px;top:22px;color:var(--acc);font-size:1.4rem;filter:drop-shadow(0 0 14px var(--acc-glow));}
+.phone-results{display:grid;gap:12px;}.phone-results .lp-opt{background:transparent!important;border:0!important;padding:0;margin:0;box-shadow:none!important;transform:none!important;display:grid;grid-template-columns:1fr auto;gap:7px 12px;}.phone-results .lp-label{font-weight:800;color:inherit;font-size:.9rem}.phone-results .lp-count{font-size:.84rem}.phone-results .lp-bar-wrap{grid-column:1/-1;width:100%;height:7px;background:rgba(255,255,255,.11)}body.light-mode .phone-results .lp-bar-wrap{background:rgba(10,12,20,.10)}.phone-results .lp-bar{background:linear-gradient(90deg,var(--acc),#8DFF00);box-shadow:0 0 16px var(--acc-glow)}.phone-cta{position:absolute;left:20px;right:20px;bottom:20px;height:50px;border-radius:16px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.055);color:inherit;font-weight:900;}
+body.light-mode .phone-cta{background:#fff;border-color:rgba(8,10,20,.12);box-shadow:0 10px 26px rgba(20,24,42,.08);}
+.chat-bubble{position:absolute;z-index:4;display:grid;grid-template-columns:34px 1fr;gap:8px;align-items:end;max-width:178px;filter:drop-shadow(0 16px 24px rgba(0,0,0,.26));animation:chatFloat 4s ease-in-out infinite;}
+.chat-bubble .chat-av{width:38px;height:38px;border-radius:50%;border:2px solid var(--acc);background:linear-gradient(135deg,#FFE0B0,#C084FC);display:grid;place-items:center;font-weight:900;color:#1b1022;}
+.chat-bubble .chat-text{padding:10px 12px;border-radius:16px;background:rgba(20,22,34,.82);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(16px);color:#fff;font-size:.78rem;line-height:1.35;}.chat-bubble small{display:block;color:rgba(255,255,255,.55);margin-top:4px;}.chat-bubble b{color:#25D366;font-size:1.1rem;position:absolute;left:26px;bottom:-8px;}.chat-a{left:-20px;top:92px}.chat-b{right:-28px;top:165px;animation-delay:.9s}.chat-c{left:-14px;bottom:112px;animation-delay:1.7s}.chat-d{right:-18px;bottom:135px;animation-delay:2.3s}@keyframes chatFloat{50%{translate:0 -8px}}
+body.light-mode .chat-bubble .chat-text{background:rgba(255,255,255,.86);color:#10131C;border-color:rgba(8,10,20,.08);}body.light-mode .chat-bubble small{color:#747B8E;}
+
+.hero-side-card{position:relative;border-radius:28px;padding:22px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.11);box-shadow:0 24px 80px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08);}
+body.light-mode .hero-side-card{background:rgba(255,255,255,.72);border-color:rgba(8,10,18,.09);box-shadow:0 24px 70px rgba(20,24,42,.09),inset 0 1px 0 rgba(255,255,255,.8);}
+.side-title{font-family:'Bricolage Grotesque',sans-serif;font-size:1.45rem;font-weight:900;letter-spacing:-.04em;margin-bottom:18px;}.flow-step{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:start;padding:14px 0;border-bottom:1px solid var(--bdr);}.flow-step:last-child{border-bottom:0}.flow-icon{width:42px;height:42px;border-radius:15px;background:var(--acc);color:#080A12;display:grid;place-items:center;font-weight:900;box-shadow:0 0 26px var(--acc-glow)}.flow-step h3{font-size:.95rem;margin-bottom:4px}.flow-step p{font-size:.78rem;color:var(--txt2);line-height:1.45}.side-arrow{position:absolute;left:-58px;top:50%;width:56px;height:80px;border-left:1px dashed var(--bdr-glow);border-bottom:1px dashed var(--bdr-glow);border-radius:0 0 0 28px;opacity:.6;}
+@media(max-width:980px){.home-page .view{max-width:640px!important}.hero-v2{padding:24px 18px 40px}.hero-shell{grid-template-columns:1fr;gap:24px;min-height:auto}.hero-copy{text-align:left}.hero-phone-zone{min-height:548px;order:2}.hero-side-card{order:3}.side-arrow{display:none}.hero-actions-v2 .btn-hero{width:100%;}.hero-title-v2{font-size:clamp(3.25rem,16vw,5.4rem)}}
+@media(max-width:560px){.mode-shell{gap:6px}.mode-toggle{width:40px;height:40px;border-radius:14px}.hero-v2{padding:20px 14px 34px}.hero-badge{font-size:.76rem}.hero-title-v2{margin-top:20px;font-size:clamp(3.4rem,18vw,5rem)}.hero-desc-v2{font-size:1rem}.hero-proof{font-size:.78rem}.hero-phone-zone{min-height:520px}.phone-frame{width:min(318px,94vw);padding:10px;border-radius:40px}.phone-screen{min-height:500px;border-radius:31px;padding:20px 17px}.chat-bubble{max-width:145px;grid-template-columns:30px 1fr}.chat-bubble .chat-av{width:32px;height:32px;font-size:.72rem}.chat-bubble .chat-text{font-size:.70rem;padding:9px 10px}.chat-a{left:-6px;top:86px}.chat-b{right:-8px;top:154px}.chat-c{left:-8px;bottom:118px}.chat-d{right:-4px;bottom:126px}.hero-side-card{border-radius:24px;padding:18px}.flow-step{grid-template-columns:38px 1fr}.flow-icon{width:38px;height:38px;border-radius:13px}}
+
+
+/* ═══════════════════════════════════════════════════
+   PATCH v7.2 · iPhone real frame + light mode fix + /img layout
+   - Mantiene la UI HTML editable dentro de un frame PNG/CSS.
+   - Corrige el bug visual del modo claro en create/respond/results.
+════════════════════════════════════════════════════ */
+
+/* Theme mode stability */
+html,body,#app{background:var(--bg);color:var(--txt);}
+body.light-mode{
+  --glass:rgba(255,255,255,.78);
+  --glass2:rgba(255,255,255,.46);
+  --line:rgba(8,10,18,.10);
+  --app-surface:#FFFFFF;
+  --app-surface-2:#F3F5EC;
+  color-scheme:light;
+}
+body:not(.light-mode){color-scheme:dark;}
+body.light-mode #app,
+body.light-mode .page-enter,
+body.light-mode .view{
+  background:transparent!important;
+}
+body.light-mode .app-stage{
+  background:
+    radial-gradient(circle at 50% -6%,rgba(203,255,0,.22),transparent 34%),
+    radial-gradient(circle at 12% 16%,rgba(0,212,255,.07),transparent 28%),
+    linear-gradient(180deg,#FFFFFF 0%,#F7F8F0 100%);
+  min-height:calc(100svh - 74px);
+  color:var(--txt);
+}
+body.light-mode .quest-card,
+body.light-mode .mission-panel,
+body.light-mode .live-arena,
+body.light-mode .share-panel,
+body.light-mode .card,
+body.light-mode .invite-card,
+body.light-mode .best-card,
+body.light-mode .link-box,
+body.light-mode .opt-card,
+body.light-mode .step-card,
+body.light-mode .results-hero-card,
+body.light-mode .results-live-hero{
+  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,.58))!important;
+  border-color:rgba(8,10,18,.10)!important;
+  box-shadow:0 24px 70px rgba(20,24,42,.10),inset 0 1px 0 rgba(255,255,255,.92)!important;
+  color:var(--txt);
+}
+body.light-mode .quest-card::before,
+body.light-mode .mission-panel::before,
+body.light-mode .live-arena::before,
+body.light-mode .share-panel::before{
+  opacity:.34;
+  background:radial-gradient(circle at 18% 18%,rgba(203,255,0,.22),transparent 32%),radial-gradient(circle at 84% 14%,rgba(0,226,138,.10),transparent 28%);
+}
+body.light-mode .input-card{
+  background:rgba(255,255,255,.70)!important;
+  border-color:rgba(8,10,18,.08)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.86),0 10px 30px rgba(20,24,42,.06)!important;
+}
+body.light-mode .input-card label,
+body.light-mode label,
+body.light-mode .sec-label{
+  color:#687083!important;
+}
+body.light-mode input[type=text],
+body.light-mode input[type=date],
+body.light-mode input[type=time]{
+  background:#FFFFFF!important;
+  color:#080A12!important;
+  border-color:rgba(8,10,18,.12)!important;
+  box-shadow:0 8px 24px rgba(20,24,42,.05)!important;
+}
+body.light-mode input::placeholder{color:#A0A7B6!important;}
+body.light-mode .slot{
+  background:linear-gradient(180deg,#FFFFFF,#F3F5EC)!important;
+  border-color:rgba(8,10,18,.10)!important;
+  box-shadow:0 16px 36px rgba(20,24,42,.08),inset 0 1px 0 rgba(255,255,255,.9)!important;
+}
+body.light-mode .theme-choice{
+  background:rgba(255,255,255,.82)!important;
+  border-color:rgba(8,10,18,.12)!important;
+}
+body.light-mode .theme-choice span{text-shadow:0 2px 10px rgba(0,0,0,.34);}
+body.light-mode .add-slot-btn{
+  background:linear-gradient(180deg,rgba(203,255,0,.20),rgba(255,255,255,.70))!important;
+  border-color:var(--bdr-glow)!important;
+}
+body.light-mode .mode-toggle,
+body.light-mode .lang-pill{
+  background:rgba(255,255,255,.72)!important;
+  border-color:rgba(8,10,18,.10)!important;
+  color:#080A12!important;
+  box-shadow:0 14px 34px rgba(20,24,42,.08),inset 0 1px 0 rgba(255,255,255,.9)!important;
+}
+body.light-mode .lang-btn:not(.on){color:#687083!important;}
+
+/* Latest iPhone frame: PNG overlay + CSS fallback */
+.phone-frame{
+  width:min(356px,86vw)!important;
+  aspect-ratio:430/880!important;
+  padding:0!important;
+  border-radius:54px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:rotate(1.5deg) translateZ(0);
+  position:relative!important;
+  overflow:visible!important;
+  isolation:isolate;
+}
+.phone-frame::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:54px;
+  z-index:3;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.88),rgba(255,255,255,.08) 10%,rgba(0,0,0,.86) 16%,transparent 20%,transparent 80%,rgba(0,0,0,.82) 84%,rgba(255,255,255,.18) 92%,rgba(255,255,255,.8)),
+    linear-gradient(180deg,rgba(255,255,255,.66),rgba(0,0,0,.18) 20%,rgba(0,0,0,.24) 78%,rgba(255,255,255,.40));
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,.42),
+    inset 0 0 0 9px rgba(4,5,10,.95),
+    inset 0 0 0 12px rgba(255,255,255,.12),
+    0 36px 90px rgba(0,0,0,.56),
+    0 0 70px var(--acc-glow2);
+}
+.phone-frame::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  top:3.25%;
+  width:33%;
+  height:4.5%;
+  transform:translateX(-50%);
+  border-radius:999px;
+  background:#05060a;
+  z-index:5;
+  pointer-events:none;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.13),0 8px 20px rgba(0,0,0,.30);
+}
+.iphone-frame-img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  z-index:6;
+  pointer-events:none;
+  user-select:none;
+  -webkit-user-drag:none;
+  filter:drop-shadow(0 32px 58px rgba(0,0,0,.50)) drop-shadow(0 0 32px var(--acc-glow2));
+}
+.iphone-frame-img[src=""],
+.iphone-frame-img:not([src]){display:none;}
+.phone-screen{
+  position:absolute!important;
+  top:4.8%!important;
+  left:7.4%!important;
+  width:85.2%!important;
+  height:90.4%!important;
+  min-height:0!important;
+  border-radius:42px!important;
+  padding:54px 20px 22px!important;
+  z-index:2!important;
+  overflow:hidden!important;
+  border:0!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);
+}
+body.light-mode .phone-frame::before{
+  box-shadow:
+    inset 0 0 0 2px rgba(20,24,42,.22),
+    inset 0 0 0 9px rgba(245,247,240,.98),
+    inset 0 0 0 12px rgba(10,12,20,.10),
+    0 36px 80px rgba(20,24,42,.20),
+    0 0 70px rgba(203,255,0,.20);
+}
+body.light-mode .phone-frame::after{background:#07080c;}
+body.light-mode .iphone-frame-img{
+  filter:drop-shadow(0 32px 58px rgba(20,24,42,.20)) drop-shadow(0 0 34px rgba(203,255,0,.24));
+}
+.phone-top{margin-bottom:16px!important;}
+.phone-plan{font-size:1.08rem!important;}
+.phone-sub{font-size:.80rem!important;}
+.phone-live{top:92px!important;right:22px!important;}
+.phone-winner{margin-top:16px!important;padding:17px!important;border-radius:22px!important;}
+.phone-winner strong{font-size:1.95rem!important;}
+.phone-results{gap:11px!important;}
+.phone-cta{bottom:24px!important;left:22px!important;right:22px!important;height:52px!important;border-radius:18px!important;z-index:3;}
+@media(max-width:560px){
+  .phone-frame{width:min(332px,94vw)!important;}
+  .phone-screen{padding:50px 18px 20px!important;border-radius:39px!important;}
+  .phone-winner strong{font-size:1.82rem!important;}
+  .phone-live{top:88px!important;right:19px!important;}
+}
+
+/* Strategic /img section */
+.visual-story{
+  max-width:1180px;
+  margin:28px auto 0;
+  padding:0 28px 16px;
+  display:grid;
+  grid-template-columns:minmax(240px,.75fr) 1.25fr;
+  gap:22px;
+  align-items:stretch;
+}
+.visual-copy{
+  border-radius:28px;
+  padding:24px;
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.026));
+  border:1px solid rgba(255,255,255,.11);
+  box-shadow:0 24px 70px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.08);
+}
+.visual-kicker{
+  color:var(--acc);
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+.visual-copy h2{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:clamp(2rem,4vw,3.4rem);
+  line-height:.95;
+  letter-spacing:-.06em;
+  margin-bottom:14px;
+}
+.visual-copy p{color:var(--txt2);line-height:1.6;font-size:.95rem;}
+.visual-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:14px;
+}
+.visual-card{
+  position:relative;
+  min-height:230px;
+  border-radius:28px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 24px 70px rgba(0,0,0,.28);
+  background:var(--elev);
+}
+.visual-wide{grid-row:span 2;min-height:474px;}
+.visual-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transform:scale(1.02);
+}
+.visual-card::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.68));
+  pointer-events:none;
+}
+.visual-card figcaption{
+  position:absolute;
+  left:16px;
+  bottom:14px;
+  z-index:1;
+  color:#fff;
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+body.light-mode .visual-copy{
+  background:rgba(255,255,255,.76);
+  border-color:rgba(8,10,18,.09);
+  box-shadow:0 24px 70px rgba(20,24,42,.09),inset 0 1px 0 rgba(255,255,255,.86);
+}
+body.light-mode .visual-card{
+  border-color:rgba(8,10,18,.08);
+  box-shadow:0 24px 65px rgba(20,24,42,.12);
+}
+@media(max-width:900px){
+  .visual-story{grid-template-columns:1fr;padding:0 18px 8px;}
+  .visual-grid{grid-template-columns:1fr 1fr;}
+  .visual-wide{grid-column:1/-1;grid-row:auto;min-height:320px;}
+}
+@media(max-width:560px){
+  .visual-story{margin-top:16px;padding:0 14px;}
+  .visual-copy{padding:20px;border-radius:24px;}
+  .visual-grid{display:flex;overflow-x:auto;gap:12px;padding-bottom:4px;scrollbar-width:none;}
+  .visual-grid::-webkit-scrollbar{display:none;}
+  .visual-card,.visual-wide{flex:0 0 78%;min-height:250px;border-radius:24px;}
+}
+
 </style>
 </head>
 <body>
@@ -718,6 +1092,32 @@ function themePickerHTML(){
     ${THEMES.map((th,i)=>`<button type="button" class="theme-choice ${i===_themeId?'on':''}" onclick="setThemeChoice(${i})" aria-label="Tema ${th.name}"><i style="background:linear-gradient(135deg,${th.acc},rgba(255,255,255,.16),${th.bg})"></i><span>${th.name}</span></button>`).join('')}
   </div></div>`;
 }
+
+
+// ── DARK / LIGHT MODE ───────────────────────────────
+function getColorMode(){ return localStorage.getItem('cuando_color_mode') || 'dark'; }
+function applyColorMode(mode, animate=true){
+  mode = mode === 'light' ? 'light' : 'dark';
+  document.body.classList.toggle('light-mode', mode === 'light');
+  document.documentElement.classList.toggle('light-mode', mode === 'light');
+  document.body.dataset.mode = mode;
+  localStorage.setItem('cuando_color_mode', mode);
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if(meta) meta.setAttribute('content', mode === 'light' ? '#F7F8F0' : '#060610');
+  const btn = document.getElementById('modeToggle');
+  if(btn){
+    btn.setAttribute('aria-label', mode === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+    btn.innerHTML = mode === 'light' ? '<span>☀</span>' : '<span>☾</span>';
+    if(animate){ btn.animate([{transform:'scale(.82) rotate(-12deg)'},{transform:'scale(1) rotate(0deg)'}],{duration:280,easing:'cubic-bezier(.34,1.56,.64,1)'}); }
+  }
+}
+function toggleColorMode(e){
+  if(e){ e.stopPropagation(); haptic(); }
+  const next = document.body.classList.contains('light-mode') ? 'dark' : 'light';
+  applyColorMode(next);
+}
+applyColorMode(getColorMode(), false);
+
 function clearLiveResults(){
   if(_rtChannel&&db){try{db.removeChannel(_rtChannel);}catch(e){console.warn('Realtime cleanup:',e);}}
   _rtChannel=null;
@@ -971,8 +1371,9 @@ function render(){
 }
 function setV(html){
   const isLoader=html.includes('loader-ring');
-  document.getElementById('app').innerHTML=`<div class="page-enter"><div class="view">${html}</div>${isLoader?'':siteFooter()}</div>`;
-  setTimeout(initNavState,0);
+  const isHome=html.includes('hero-v2');
+  document.getElementById('app').innerHTML=`<div class="page-enter ${isHome?'home-page':''}"><div class="view">${html}</div>${isLoader?'':siteFooter()}</div>`;
+  setTimeout(()=>{initNavState();hydrateNavIcon();applyColorMode(getColorMode(), false);},0);
 }
 async function aV(fn){
   setV(`<div class="loader"><div class="loader-ring"></div><span>${t('loading')}</span></div>`);
@@ -1093,20 +1494,28 @@ function siteFooter(){
 
 // ── NAV ──────────────────────────────────────────────
 function nav(){
+  const mode = getColorMode();
   return `<nav class="nav" aria-label="CUÁNDO navigation">
     <div class="wordmark" onclick="go('')" role="button" aria-label="Ir al inicio">
       <div class="nav-icon" id="nav-icon-wrap"></div>
-      <span>cuando</span>
+      <span>CUÁNDO</span>
     </div>
-    <div class="lang-pill" aria-label="Idioma">
-      <button class="lang-btn ${lang==='es'?'on':''}" onclick="setLang('es')">ES</button>
-      <button class="lang-btn ${lang==='en'?'on':''}" onclick="setLang('en')">EN</button>
+    <div class="mode-shell">
+      <div class="lang-pill" aria-label="Idioma">
+        <button class="lang-btn ${lang==='es'?'on':''}" onclick="setLang('es')">ES</button>
+        <button class="lang-btn ${lang==='en'?'on':''}" onclick="setLang('en')">EN</button>
+      </div>
+      <button class="mode-toggle" id="modeToggle" onclick="toggleColorMode(event)" aria-label="Cambiar tema">
+        <span>${mode==='light'?'☀':'☾'}</span>
+      </button>
     </div>
   </nav>`;
 }
 // Called after nav is inserted to hydrate the icon
 function hydrateNavIcon(){
   const wrap=document.getElementById('nav-icon-wrap'); if(!wrap)return;
+  wrap.className='nav-icon';
+  wrap.innerHTML='';
   const img=document.createElement('img'); img.src='./img/cuando-icon.png'; img.alt='';
   img.onerror=()=>{ wrap.className='nav-icon-fallback'; wrap.innerHTML=`<div class="wordmark-dot"></div>`; };
   wrap.appendChild(img);
@@ -1118,7 +1527,7 @@ function startPV(){
   const bars=document.querySelectorAll('.lp-bar');
   const cnts=document.querySelectorAll('.lp-count');
   if(!opts.length)return;
-  const targets=[90,34,62],seq=[0,2,1],totals=[3,1,2];
+  const targets=[96,62,36],seq=[0,1,2],totals=[8,5,3];
   function cycle(){
     opts.forEach(o=>o.classList.remove('hot'));
     bars.forEach(b=>{b.style.transition='none';b.style.width='0%';});
@@ -1136,56 +1545,90 @@ function startPV(){
 // ── VIEW: HOME ───────────────────────────────────────
 function vHome(){
   const opts=lang==='es'
-    ?[['Vie 16 · 7:00 PM'],['Vie 16 · 9:00 PM'],['Sáb 17 · 8:00 PM']]
-    :[['Fri May 16 · 7PM'],['Fri May 16 · 9PM'],['Sat May 17 · 8PM']];
-  const avColors=[['#2A1F00','#CBFF00'],['#001F1A','#00E28A'],['#1A0020','#C084FC'],['#1F0010','#F472B6']];
-  const avNames=['M','J','A','C'];
-
+    ?[['Viernes 8:30 PM'],['Sábado 7:00 PM'],['Domingo 6:00 PM']]
+    :[['Friday 8:30 PM'],['Saturday 7:00 PM'],['Sunday 6:00 PM']];
+  const copy=lang==='es'
+    ?{
+      badge:'Sin cuentas. Sin drama.',badgeStrong:'NUEVO',title:'¿Cuándo pueden?',accent:'CUÁNDO lo hace fácil.',desc:'Crea un plan en segundos, compártelo por WhatsApp y descubre el mejor horario con tu grupo.',cta:'Crear mi plan gratis',proof:'Más de 50K grupos\nya coordinados',plan:'Cena el viernes 🍔',sub:'5 amigos respondieron',best:'Mejor horario',winner:'Viernes\n8:30 PM',votes:'8 votos',view:'Ver resultados',side:'Así de fácil',s1:'Crea tu plan',s1b:'Escribe el plan y agrega opciones de fecha y hora.',s2:'Comparte el link',s2b:'Mándalo por WhatsApp a tu grupo.',s3:'Todos votan',s3b:'El mejor horario aparece al instante.',m1:'Listo, ahí entro! 🙌',m2:'Dale, cuenta conmigo 👍',m3:'Yo puedo 😎',m4:'Perfecto 🤩'
+    }
+    :{
+      badge:'No accounts. No chaos.',badgeStrong:'NEW',title:'When can everyone?',accent:'CUÁNDO makes it easy.',desc:'Create a plan in seconds, share it on WhatsApp and find the best time with your group.',cta:'Create my free plan',proof:'More than 50K groups\nalready coordinated',plan:'Friday dinner 🍔',sub:'5 friends replied',best:'Best time',winner:'Friday\n8:30 PM',votes:'8 votes',view:'See results',side:'That easy',s1:'Create the plan',s1b:'Write the plan and add date and time options.',s2:'Share the link',s2b:'Send it on WhatsApp to your group.',s3:'Everyone votes',s3b:'The best time appears instantly.',m1:'I’m in! 🙌',m2:'Count me in 👍',m3:'I can 😎',m4:'Perfect 🤩'
+    };
   const html=`
   ${nav()}
-  <div class="hero">
-    <div class="hero-bg-img"></div>
-    <div class="hero-bg-grad"></div>
-    <div class="hero-orb hero-orb-1"></div>
-    <div class="hero-orb hero-orb-2"></div>
-    <div class="hero-grid"></div>
-    <div class="hero-content">
-      <div class="eyebrow s1"><div class="eyebrow-pulse"></div>${t('pill')}</div>
-      <h1 class="hero-h1 s2">${t('h1a')}<br><span class="hero-h1-accent">${t('h1b')}</span></h1>
-      <p class="hero-tagline s3">${t('tag').replace('\n','<br>')}</p>
-      <div class="s4" style="margin-bottom:36px">
-        <button class="btn-hero" id="main-cta" onclick="initCreate(event)">${I.clk} ${t('cta')}</button>
-      </div>
-      <div class="lp-wrap s5">
-        <div class="lp-card">
-          <div class="lp-head">
-            <div class="lp-plan-name">${t('lp_title')}</div>
-            <div class="lp-live-badge"><div class="lp-live-dot"></div>${t('lp_live')}</div>
+  <section class="hero-v2">
+    <div class="hero-noise-grid"></div>
+    <div class="hero-confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="hero-shell">
+      <div class="hero-copy">
+        <div class="hero-badge s1"><strong>${copy.badgeStrong}</strong><span>${copy.badge}</span></div>
+        <h1 class="hero-title-v2 s2">${copy.title}<span class="accent">${copy.accent}</span></h1>
+        <p class="hero-desc-v2 s3">${copy.desc}</p>
+        <div class="hero-actions-v2 s4">
+          <button class="btn-hero" id="main-cta" onclick="initCreate(event)">${I.clk} ${copy.cta} ${I.arr}</button>
+        </div>
+        <div class="hero-proof s5">
+          <div class="proof-stack">
+            <div class="proof-av">M</div><div class="proof-av">J</div><div class="proof-av">A</div><div class="proof-av">C</div><div class="proof-plus">+12</div>
           </div>
-          ${opts.map((o,i)=>`
-            <div class="lp-opt" data-i="${i}">
-              <div class="lp-dot"></div>
-              <div class="lp-label">${o[0]}</div>
-              <div class="lp-bar-wrap"><div class="lp-bar"></div></div>
-              <div class="lp-count">0</div>
-            </div>`).join('')}
-          <div class="live-users">
-            <div style="display:flex">
-              ${avNames.map((n,i)=>`<div class="live-av" style="background:${avColors[i][0]};color:${avColors[i][1]}">${n}</div>`).join('')}
-            </div>
-            <div class="live-count"><strong>+2,400</strong> ${t('live')}</div>
-          </div>
+          <div>${copy.proof.replace(/\n/g,'<br>')}</div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- APP SCREENSHOTS STRIP -->
-  <div class="screenshots reveal">
-    <div class="sc-card"><img src="./img/demo.jpg" alt="" onerror="this.closest('.sc-card').style.display='none'"><div class="sc-caption">${t('sc1')}</div></div>
-    <div class="sc-card"><img src="./img/demo-share.jpg" alt="" onerror="this.closest('.sc-card').style.display='none'"><div class="sc-caption">${t('sc2')}</div></div>
-    <div class="sc-card"><img src="./img/results.jpg" alt="" onerror="this.closest('.sc-card').style.display='none'"><div class="sc-caption">${t('sc3')}</div></div>
-  </div>
+      <div class="hero-phone-zone s5">
+        <div class="phone-glow"></div>
+        <div class="chat-bubble chat-a"><div class="chat-av">L</div><div class="chat-text">${copy.m1}<small>8:15 PM</small></div><b>◔</b></div>
+        <div class="chat-bubble chat-b"><div class="chat-av">D</div><div class="chat-text">${copy.m2}<small>8:17 PM</small></div><b>◔</b></div>
+        <div class="chat-bubble chat-c"><div class="chat-av">Y</div><div class="chat-text">${copy.m3}<small>8:30 PM</small></div><b>◔</b></div>
+        <div class="chat-bubble chat-d"><div class="chat-av">N</div><div class="chat-text">${copy.m4}<small>8:20 PM</small></div><b>◔</b></div>
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="phone-top"><span>‹</span><div class="phone-menu"><span></span><span></span><span></span></div></div>
+            <div class="phone-plan">${copy.plan}</div>
+            <div class="phone-sub">${copy.sub}</div>
+            <div class="phone-live">${t('lp_live')}</div>
+            <div class="phone-winner">
+              <small>${copy.best}</small>
+              <strong>${copy.winner.replace(/\n/g,'<br>')}</strong>
+              <span class="crown">♛</span>
+              <div style="margin-top:8px;color:var(--acc);font-size:.82rem;font-weight:900">● ${copy.votes}</div>
+            </div>
+            <div class="phone-results">
+              ${opts.map((o,i)=>`
+                <div class="lp-opt" data-i="${i}">
+                  <div class="lp-label">${o[0]}</div>
+                  <div class="lp-count">0</div>
+                  <div class="lp-bar-wrap"><div class="lp-bar"></div></div>
+                </div>`).join('')}
+            </div>
+            <button class="phone-cta">${copy.view}</button>
+          </div>
+          <img class="iphone-frame-img" src="./img/iphone-frame.png" alt="" loading="eager" decoding="async" onerror="this.style.display='none'">
+        </div>
+      </div>
+
+      <aside class="hero-side-card s6">
+        <div class="side-arrow"></div>
+        <div class="side-title">${copy.side}</div>
+        <div class="flow-step"><div class="flow-icon">1</div><div><h3>${copy.s1}</h3><p>${copy.s1b}</p></div></div>
+        <div class="flow-step"><div class="flow-icon">2</div><div><h3>${copy.s2}</h3><p>${copy.s2b}</p></div></div>
+        <div class="flow-step"><div class="flow-icon">3</div><div><h3>${copy.s3}</h3><p>${copy.s3b}</p></div></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="visual-story reveal" aria-label="CUÁNDO en acción">
+    <div class="visual-copy">
+      <div class="visual-kicker">✦ App real, flujo real</div>
+      <h2>${lang==='es'?'Del chat al mejor horario.':'From chat to the best time.'}</h2>
+      <p>${lang==='es'?'Las imágenes de /img se usan como apoyo visual para que la experiencia se sienta social, móvil y lista para compartir.':'The /img assets support the social, mobile, share-ready experience.'}</p>
+    </div>
+    <div class="visual-grid">
+      <figure class="visual-card visual-wide"><img src="./img/lifestyle.jpg" alt="Amigos coordinando desde el móvil" loading="lazy"><figcaption>${lang==='es'?'Grupo coordinando':'Coordinating group'}</figcaption></figure>
+      <figure class="visual-card"><img src="./img/demo-share.jpg" alt="Compartir por WhatsApp" loading="lazy"><figcaption>${lang==='es'?'Comparte el link':'Share the link'}</figcaption></figure>
+      <figure class="visual-card"><img src="./img/results.jpg" alt="Resultados en vivo" loading="lazy"><figcaption>${lang==='es'?'Resultado en vivo':'Live results'}</figcaption></figure>
+    </div>
+  </section>
 
   <!-- HOW IT WORKS -->
   <div class="section">
@@ -1197,24 +1640,15 @@ function vHome(){
     </div>
   </div>
 
-  <!-- LIFESTYLE PHOTO -->
-  <div class="feature-photo reveal">
-    <img src="./img/lifestyle.jpg" alt="" onerror="this.closest('.feature-photo').style.display='none'">
-    <div class="feature-photo-grad"></div>
-    <div class="feature-photo-text">
-      <div class="fp-label">${t('ph_label')}</div>
-      <div class="fp-title">${t('ph_title')}</div>
-    </div>
-  </div>
-
-  <div style="padding:32px 20px 0">
+  <div style="padding:32px 20px 0;max-width:560px;margin:0 auto">
     <button class="btn btn-primary reveal" onclick="initCreate(event)">${I.clk} ${t('cta')}</button>
   </div>
   `;
 
-  setTimeout(hydrateNavIcon,0);
+  setTimeout(()=>{hydrateNavIcon();applyColorMode(getColorMode(), false);},0);
   return html;
 }
+
 
 // ── VIEW: CREATE ─────────────────────────────────────
 function initCreate(e){if(e)ripple(e);haptic();_themeId=Number(localStorage.getItem('cuando_theme')||0)||0;applyTheme(_themeId);_slots=[{id:uid(),date:'',time:''},{id:uid(),date:'',time:''}];go('create');}
