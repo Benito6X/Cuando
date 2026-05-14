@@ -358,38 +358,54 @@ input[type=text],input[type=date],input[type=time]{min-height:52px;}
   #toast{bottom:calc(28px + env(safe-area-inset-bottom));}
   .view{padding-bottom:calc(100px + env(safe-area-inset-bottom));}
 }
+
+
+/* ── USER REQUEST PATCH · no intro, brighter UI, larger logo, theme picker ── */
+#splash{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;}
+:root{
+  --bg:#0A0A16; --bg2:#101020;
+  --card:#17172A; --elev:#202038; --elev2:#292943;
+  --bdr:rgba(255,255,255,.10); --bdr-hi:rgba(255,255,255,.18);
+  --txt:#FFFFFF; --txt2:#B7B7CE; --txt3:#8585A0; --mut:#6E6E88;
+  --shadow-sm:0 8px 24px rgba(0,0,0,.28);
+  --shadow:0 18px 52px rgba(0,0,0,.40);
+}
+body{background:radial-gradient(circle at 50% -10%,rgba(203,255,0,.06),transparent 34%),linear-gradient(180deg,#0B0B18 0%,#080813 100%);}
+body::before{opacity:.018;}
+.nav{padding:14px 20px;background:rgba(12,12,27,.88);}
+.wordmark{font-size:1.55rem;gap:10px;}
+.nav-icon{width:38px;height:38px;border-radius:12px;}
+.nav-icon img{object-fit:contain;padding:3px;}
+.hero-bg-img{opacity:.12;}
+.hero-bg-grad{background:radial-gradient(ellipse at 55% 0%,rgba(203,255,0,.13) 0%,transparent 55%),radial-gradient(ellipse at 0% 100%,rgba(0,226,138,.07) 0%,transparent 50%);}
+.hero-h1{filter:drop-shadow(0 16px 36px rgba(0,0,0,.32));}
+.card,.lp-card,.step-card,.slot,.invite-card,.best-card,.link-box,.opt-card{background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.03));border-color:var(--bdr-hi);}
+input[type=text],input[type=date],input[type=time]{background:rgba(255,255,255,.075);border-color:rgba(255,255,255,.16);}
+.pg-sub,.step-desc,.hero-tagline,.empty-text,.link-text,.result-names{color:var(--txt2);}
+.theme-picker{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:8px 0 18px;}
+.theme-choice{position:relative;min-height:54px;border:1.5px solid var(--bdr-hi);border-radius:16px;background:rgba(255,255,255,.055);cursor:pointer;overflow:hidden;transition:transform .22s var(--ease-spring),border-color .2s,box-shadow .2s;-webkit-tap-highlight-color:transparent;}
+.theme-choice:hover{transform:translateY(-2px);border-color:var(--bdr-glow);box-shadow:0 10px 28px var(--acc-glow2);}
+.theme-choice.on{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc-dim),0 18px 34px var(--acc-glow2);}
+.theme-choice i{position:absolute;inset:0;display:block;opacity:.95;}
+.theme-choice span{position:absolute;left:8px;right:8px;bottom:7px;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.live-pill{display:inline-flex;align-items:center;gap:7px;font-size:.72rem;font-weight:800;color:var(--grn);letter-spacing:.08em;text-transform:uppercase;background:var(--grn-dim);border:1px solid rgba(0,226,138,.24);border-radius:999px;padding:6px 10px;}
+.live-pill::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--grn);box-shadow:0 0 10px var(--grn-glow);animation:blink 1.2s ease infinite;}
+.notify-btn{background:rgba(255,255,255,.055);border:1px solid var(--bdr-hi);color:var(--txt);border-radius:999px;padding:7px 11px;font-size:.76rem;font-weight:700;cursor:pointer;}
+@media(max-width:560px){
+  .nav{padding:14px 18px;}
+  .wordmark{font-size:1.75rem;}
+  .nav-icon{width:46px;height:46px;border-radius:14px;}
+  .lang-btn{padding:7px 14px;font-size:.78rem;}
+  .hero{padding-inline:18px;}
+  .hero-content{padding-top:26px;}
+  .hero-h1{font-size:clamp(4.8rem,22vw,7rem);}
+  .theme-picker{grid-template-columns:repeat(2,1fr);}
+  .theme-choice{min-height:58px;}
+}
+
 </style>
 </head>
 <body>
-
-<!-- SPLASH · TRÓPIX -->
-<div id="splash" aria-label="Cargando TRÓPIX Studio">
-  <div class="tpx-backdrop" aria-hidden="true"></div>
-  <div class="tpx-overhead" aria-hidden="true"></div>
-  <div class="tpx-spot left" aria-hidden="true"></div>
-  <div class="tpx-spot right" aria-hidden="true"></div>
-  <div class="tpx-side-light left" aria-hidden="true"></div>
-  <div class="tpx-side-light right" aria-hidden="true"></div>
-  <div class="tpx-haze" aria-hidden="true"></div>
-  <div class="tpx-floor" aria-hidden="true"></div>
-  <div class="tpx-grain" aria-hidden="true"></div>
-  <main class="tpx-stage">
-    <section class="tpx-center">
-      <div class="tpx-logo-shell" aria-hidden="true">
-        <span class="tpx-logo-aura"></span>
-        <span class="tpx-logo-shadow"></span>
-        <span class="tpx-sweep"></span>
-        <img id="tpxIntroLogo" class="tpx-logo" src="./img/tropix.png" alt="TRÓPIX Studio" loading="eager" decoding="async" />
-      </div>
-      <div class="tpx-platform" aria-hidden="true"></div>
-      <section class="tpx-loader" aria-label="Cargando">
-        <p class="tpx-loader-label">LOADING</p>
-        <div class="tpx-track"><span id="tpxIntroFill" class="tpx-fill"></span><span class="tpx-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
-        <p id="tpxIntroPercent" class="tpx-percent">0%</p>
-      </section>
-    </section>
-  </main>
-</div>
 
 <canvas id="confetti-canvas"></canvas>
 <div id="app"></div>
@@ -430,7 +446,23 @@ function applyTheme(id) {
   s.setProperty('--bdr-glow', th.bdr);
   s.setProperty('--acc-bg', th.bg);
 }
-function resetTheme() { applyTheme(0); }
+function resetTheme() { applyTheme(_themeId || 0); }
+function setThemeChoice(id){
+  _themeId=Number(id)||0;
+  localStorage.setItem('cuando_theme',String(_themeId));
+  applyTheme(_themeId);
+  document.querySelectorAll('.theme-choice').forEach((el,k)=>el.classList.toggle('on',k===_themeId));
+}
+function themePickerHTML(){
+  return `<div class="inp-grp s4"><label>✦ Tema visual</label><div class="theme-picker">
+    ${THEMES.map((th,i)=>`<button type="button" class="theme-choice ${i===_themeId?'on':''}" onclick="setThemeChoice(${i})" aria-label="Tema ${th.name}"><i style="background:linear-gradient(135deg,${th.acc},rgba(255,255,255,.16),${th.bg})"></i><span>${th.name}</span></button>`).join('')}
+  </div></div>`;
+}
+function clearLiveResults(){
+  if(_rtChannel&&db){try{db.removeChannel(_rtChannel);}catch(e){console.warn('Realtime cleanup:',e);}}
+  _rtChannel=null;
+  if(_ri){clearInterval(_ri);_ri=null;}
+}
 
 // ── I18N ────────────────────────────────────────────
 const C = {
@@ -506,7 +538,7 @@ const C = {
 
 // ── STATE ────────────────────────────────────────────
 let lang = localStorage.getItem('cl') || 'es';
-let _slots=[], _sel=new Set(), _plan=null, _ri=null, _pvLoop=null, _themeId=0;
+let _slots=[], _sel=new Set(), _plan=null, _ri=null, _pvLoop=null, _themeId=Number(localStorage.getItem('cuando_theme')||0)||0, _rtChannel=null, _lastResultCount=0;
 const t = k => C[lang][k];
 
 // ── SUPABASE ─────────────────────────────────────────
@@ -668,7 +700,7 @@ window.addEventListener('load',render);
 
 // ── RENDER ───────────────────────────────────────────
 function render(){
-  clearInterval(_ri); clearInterval(_pvLoop);
+  clearLiveResults(); clearInterval(_pvLoop);
   const r=getR();
   if(r.v==='home'){resetTheme();setV(vHome());requestAnimationFrame(()=>{startPV();initReveal();});}
   else if(r.v==='create'){resetTheme();setV(vCreate());}
@@ -889,7 +921,7 @@ function vHome(){
 }
 
 // ── VIEW: CREATE ─────────────────────────────────────
-function initCreate(e){if(e)ripple(e);haptic();_slots=[{id:uid(),date:'',time:''},{id:uid(),date:'',time:''}];go('create');}
+function initCreate(e){if(e)ripple(e);haptic();_themeId=Number(localStorage.getItem('cuando_theme')||0)||0;applyTheme(_themeId);_slots=[{id:uid(),date:'',time:''},{id:uid(),date:'',time:''}];go('create');}
 
 function vCreate(){
   if(!_slots.length)_slots=[{id:uid(),date:'',time:''},{id:uid(),date:'',time:''}];
@@ -903,6 +935,7 @@ function vCreate(){
     <div id="create-err"></div>
     <div class="inp-grp s2"><label>${t('p_l')}</label><input type="text" id="plan-title" placeholder="${t('p_ph')}" maxlength="80" autocomplete="off"></div>
     <div class="inp-grp s3"><label>${t('n_l')}</label><input type="text" id="creator-name" placeholder="${t('n_ph')}" maxlength="40" autocomplete="off"></div>
+    ${themePickerHTML()}
     <div class="inp-grp s4">
       <label>${I.clk} ${t('o_l')}</label>
       <div id="slots-list">${_slots.map((s,k)=>slotHTML(s,k)).join('')}</div>
@@ -949,7 +982,7 @@ async function createPlan(e){
   if(!isDB){showErr('Supabase no está conectado. No se generó un link falso. Revisa SUPABASE_URL y SUPABASE_KEY.');return;}
   if(genBtn){genBtn.innerHTML='<span class="btn-spinner"></span>';genBtn.disabled=true;}
   haptic(10);
-  const themeId=Math.floor(Math.random()*THEMES.length);
+  const themeId=_themeId||0;
   const payload={title,creator_name:creator,options:valid.map(x=>({id:x.id,date:x.date,time:x.time})),theme_id:themeId};
   try{
     const{data,error}=await db.from('plans').insert(payload).select().single();
@@ -1065,11 +1098,12 @@ async function submitResponse(e){
   if(!name){if(errEl)errEl.innerHTML=`<div class="err-msg">⚠️ ${t('ef')}</div>`;haptic([30,50,30]);return;}
   if(btn){btn.innerHTML='<span class="btn-spinner"></span>';btn.disabled=true;}
   haptic(10);
-  const data={plan_id:_plan.id,name,selected:[..._sel]};
+  const selected=[..._sel];
+  const data={plan_id:_plan.id,name,selected_options:selected};
   if(_plan.id.startsWith('demo-')||!isDB){
     await new Promise(r=>setTimeout(r,500));
     const arr=JSON.parse(sessionStorage.getItem('r:'+_plan.id)||'[]');
-    arr.push(data);sessionStorage.setItem('r:'+_plan.id,JSON.stringify(arr));
+    arr.push({...data,selected});sessionStorage.setItem('r:'+_plan.id,JSON.stringify(arr));
     toast(t('saved'),'🎯');setTimeout(()=>go('results/'+_plan.id),900);return;
   }
   try{
@@ -1079,7 +1113,7 @@ async function submitResponse(e){
   }catch(err){
     console.warn('DB fallback:',err);
     const arr=JSON.parse(sessionStorage.getItem('r:'+_plan.id)||'[]');
-    arr.push(data);sessionStorage.setItem('r:'+_plan.id,JSON.stringify(arr));
+    arr.push({...data,selected});sessionStorage.setItem('r:'+_plan.id,JSON.stringify(arr));
     toast(t('saved'),'🎯');setTimeout(()=>go('results/'+_plan.id),900);
   }
 }
@@ -1097,7 +1131,7 @@ async function vResults(id){
   }
   const cnt={},nms={};
   _plan.options.forEach(o=>{cnt[o.id]=0;nms[o.id]=[];});
-  responses.forEach(r=>(r.selected||[]).forEach(x=>{if(cnt[x]!==undefined){cnt[x]++;nms[x].push(r.name);}}));
+  responses.forEach(r=>((r.selected_options||r.selected||[])).forEach(x=>{if(cnt[x]!==undefined){cnt[x]++;nms[x].push(r.name);}}));
   const sorted=[..._plan.options].sort((a,b)=>cnt[b.id]-cnt[a.id]);
   const best=sorted[0];
   const maxC=Math.max(...Object.values(cnt),1);
@@ -1105,7 +1139,7 @@ async function vResults(id){
   const hasBest=responses.length>0&&cnt[best?.id]>0;
   const thName=THEMES[_themeId]?.name||'Lime';
   if(hasBest)setTimeout(()=>confetti(),400);
-  if(!id.startsWith('demo-')&&isDB)_ri=setInterval(()=>aV(()=>vResults(id)),14000);
+  if(!id.startsWith('demo-')&&isDB)setTimeout(()=>setupLiveResults(id,responses.length),0);
 
   const html=`
   ${nav()}
@@ -1114,6 +1148,8 @@ async function vResults(id){
     <div class="pg-title s1">${escHTML(_plan.title)}</div>
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px" class="s2">
       <div class="theme-badge">✦ ${thName} Edition</div>
+      <span class="live-pill">LIVE</span>
+      <button class="notify-btn" onclick="askNotify()">🔔 Notificarme</button>
       <span style="font-size:.82rem;color:var(--txt3)">${responses.length} ${t('nr')}</span>
       <span class="success-ring" style="${responses.length>0?'':'opacity:.3'}"></span>
       <button onclick="aV(()=>vResults('${id}'))" style="background:none;border:none;color:var(--acc);font-size:.82rem;font-weight:600;cursor:pointer;padding:0;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:4px">${I.clk} ${t('rf')}</button>
@@ -1152,6 +1188,51 @@ async function vResults(id){
   </div>`;
   setTimeout(hydrateNavIcon,0);
   return html;
+}
+
+
+// ── LIVE RESULTS + NOTIFICATIONS ────────────────────
+function askNotify(){
+  if(!('Notification' in window)){toast('Tu navegador no soporta notificaciones','🔕');return;}
+  if(Notification.permission==='granted'){toast('Notificaciones activadas','🔔');return;}
+  Notification.requestPermission().then(p=>toast(p==='granted'?'Notificaciones activadas':'Notificaciones no activadas',p==='granted'?'🔔':'🔕'));
+}
+function notifyResponse(name){
+  const msg=`${name||'Alguien'} ya respondió`;
+  toast(msg,'🔔',4200);
+  if('Notification' in window && Notification.permission==='granted'){
+    try{new Notification('CUÁNDO', { body: msg, icon:'./img/cuando-icon.png', tag:'cuando-response' });}catch(e){}
+  }
+}
+function setupLiveResults(id,currentCount=0){
+  clearLiveResults();
+  _lastResultCount=currentCount;
+  if(!isDB||id.startsWith('demo-'))return;
+  try{
+    _rtChannel=db.channel('cuando-results-'+id+'-'+Date.now())
+      .on('postgres_changes',{event:'INSERT',schema:'public',table:'responses',filter:`plan_id=eq.${id}`},payload=>{
+        const name=payload?.new?.name||'Alguien';
+        _lastResultCount++;
+        notifyResponse(name);
+        setTimeout(()=>aV(()=>vResults(id)),450);
+      })
+      .subscribe(status=>console.log('Realtime responses:',status));
+  }catch(e){console.warn('Realtime no disponible:',e);}
+
+  // Fallback: si Realtime no está activado en Supabase, revisa cada 6 segundos.
+  _ri=setInterval(async()=>{
+    try{
+      const {data,error}=await db.from('responses').select('id,name,created_at').eq('plan_id',id).order('created_at');
+      if(error)throw error;
+      const list=data||[];
+      if(list.length>_lastResultCount){
+        const last=list[list.length-1];
+        _lastResultCount=list.length;
+        notifyResponse(last?.name||'Alguien');
+        aV(()=>vResults(id));
+      }
+    }catch(e){console.warn('Live fallback:',e);}
+  },6000);
 }
 
 // ── DATA ─────────────────────────────────────────────
