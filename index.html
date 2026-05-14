@@ -1037,6 +1037,492 @@ body.light-mode .visual-card{
   .visual-card,.visual-wide{flex:0 0 78%;min-height:250px;border-radius:24px;}
 }
 
+
+/* ═══════════════════════════════════════════════════
+   CUÁNDO · FINAL MASTER PATCH — Tropix Studio
+   Light mode fix · iPhone Pro frame · Microinteractions
+   Premium icons · General quality uplift
+════════════════════════════════════════════════════ */
+
+/* ── 1. LIGHT MODE — COMPREHENSIVE FIX ─────────────── */
+/* Nuclear override: ensure every bg responds correctly */
+body.light-mode {
+  background:
+    radial-gradient(circle at 50% -8%, rgba(203,255,0,.38), transparent 36%),
+    radial-gradient(circle at 9% 20%, rgba(0,226,138,.12), transparent 30%),
+    radial-gradient(circle at 94% 18%, rgba(0,212,255,.11), transparent 28%),
+    linear-gradient(180deg, #FFFFFF 0%, #F3F5EC 100%) !important;
+  color: #080A12 !important;
+}
+body.light-mode #app,
+body.light-mode .page-enter,
+body.light-mode .view,
+body.light-mode .app-stage,
+body.light-mode .results-shell {
+  background: transparent !important;
+  color: #080A12;
+}
+/* Nav */
+body.light-mode .nav {
+  background: rgba(255,255,255,.86) !important;
+  border-bottom-color: rgba(8,10,18,.07) !important;
+  box-shadow: 0 4px 24px rgba(20,24,42,.07) !important;
+}
+body.light-mode .nav.nav-float {
+  background: rgba(255,255,255,.46) !important;
+}
+body.light-mode .back-btn { color: #4E5362 !important; }
+body.light-mode .back-btn:hover { color: #080A12 !important; }
+body.light-mode .btn-ghost { color: #4E5362 !important; }
+
+/* All card surfaces */
+body.light-mode .lp-card,
+body.light-mode .card,
+body.light-mode .step-card,
+body.light-mode .invite-card,
+body.light-mode .best-card,
+body.light-mode .link-box,
+body.light-mode .opt-card,
+body.light-mode .quest-card,
+body.light-mode .mission-panel,
+body.light-mode .live-arena,
+body.light-mode .share-panel,
+body.light-mode .results-hero-card,
+body.light-mode .results-live-hero,
+body.light-mode .result-card,
+body.light-mode .empty-live,
+body.light-mode .visual-copy,
+body.light-mode .hero-side-card {
+  background: rgba(255,255,255,.90) !important;
+  border-color: rgba(8,10,18,.09) !important;
+  box-shadow: 0 16px 52px rgba(20,24,42,.09), inset 0 1px 0 rgba(255,255,255,.96) !important;
+  color: #080A12 !important;
+}
+body.light-mode .slot {
+  background: linear-gradient(180deg, #FFFFFF, #F3F5EC) !important;
+  border-color: rgba(8,10,18,.10) !important;
+  color: #080A12 !important;
+}
+body.light-mode .input-card {
+  background: rgba(255,255,255,.72) !important;
+  border-color: rgba(8,10,18,.08) !important;
+  color: #080A12 !important;
+}
+/* Text colors */
+body.light-mode label,
+body.light-mode .sec-label,
+body.light-mode .quest-kicker,
+body.light-mode .mission-kicker,
+body.light-mode .slot-num { color: #687083 !important; }
+body.light-mode .quest-title,
+body.light-mode .mission-title,
+body.light-mode .quest-sub,
+body.light-mode .mission-sub,
+body.light-mode .pg-title,
+body.light-mode .pg-sub,
+body.light-mode .section-title,
+body.light-mode .results-live-title,
+body.light-mode .side-title { color: var(--txt) !important; }
+body.light-mode .step-desc,
+body.light-mode .hero-tagline,
+body.light-mode .empty-text,
+body.light-mode .link-text,
+body.light-mode .result-names,
+body.light-mode .flow-step p,
+body.light-mode .visual-copy p { color: var(--txt2) !important; }
+/* Inputs */
+body.light-mode input[type=text],
+body.light-mode input[type=date],
+body.light-mode input[type=time] {
+  background: #FFFFFF !important;
+  color: #080A12 !important;
+  border-color: rgba(8,10,18,.12) !important;
+  color-scheme: light;
+}
+body.light-mode input::placeholder { color: #A0A7B6 !important; }
+/* Dividers */
+body.light-mode .divider { background: rgba(8,10,18,.08) !important; }
+body.light-mode .result-row { border-bottom-color: rgba(8,10,18,.07) !important; }
+body.light-mode .flow-step { border-bottom-color: rgba(8,10,18,.07) !important; }
+/* Buttons in light mode */
+body.light-mode .notify-btn,
+body.light-mode .refresh-mini {
+  background: rgba(255,255,255,.82) !important;
+  border-color: rgba(8,10,18,.10) !important;
+  color: #080A12 !important;
+}
+body.light-mode .notify-btn:hover,
+body.light-mode .refresh-mini:hover { background: var(--acc-dim) !important; color: var(--acc) !important; }
+body.light-mode .del-btn { color: #787F91 !important; border-color: rgba(8,10,18,.12) !important; }
+body.light-mode .copy-btn { background: var(--acc-dim) !important; }
+/* Name pills */
+body.light-mode .name-pill { background: rgba(8,10,18,.05) !important; border-color: rgba(8,10,18,.08) !important; color: var(--txt2) !important; }
+/* Footer */
+body.light-mode .cuando-footer {
+  background: rgba(255,255,255,.58) !important;
+  border-top-color: rgba(8,10,18,.07) !important;
+}
+body.light-mode .cuando-copy { color: #787F91 !important; }
+body.light-mode .cuando-copy strong { color: #080A12 !important; }
+body.light-mode .cuando-center { color: #787F91 !important; }
+body.light-mode .tropix-credit { background: rgba(255,255,255,.82) !important; border-color: rgba(8,10,18,.10) !important; }
+body.light-mode .tropix-label { color: #787F91 !important; }
+/* Toast */
+body.light-mode #toast { background: #FFFFFF !important; color: #080A12 !important; border-color: rgba(8,10,18,.10) !important; box-shadow: 0 24px 60px rgba(20,24,42,.14) !important; }
+/* Theme chips */
+body.light-mode .theme-choice { background: rgba(255,255,255,.84) !important; border-color: rgba(8,10,18,.12) !important; }
+body.light-mode .theme-choice span { color: #080A12; text-shadow: 0 1px 6px rgba(0,0,0,.18); }
+/* Live pill */
+body.light-mode .live-pill { background: rgba(0,226,138,.12) !important; border-color: rgba(0,226,138,.28) !important; }
+/* Loader */
+body.light-mode .loader { color: var(--txt2); }
+body.light-mode .loader-ring { border-color: rgba(8,10,18,.12); border-top-color: var(--acc); }
+/* Phone */
+body.light-mode .phone-results .lp-bar-wrap { background: rgba(10,12,20,.10) !important; }
+
+/* ── 2. IPHONE FRAME — Bigger, more realistic ───────── */
+.phone-frame {
+  width: min(390px,88vw) !important;
+  border-radius: 56px !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  animation: phoneFrameFloat 6.5s ease-in-out infinite !important;
+  transform-origin: center bottom;
+}
+@keyframes phoneFrameFloat {
+  0%, 100% { transform: rotate(1.5deg) translateY(0) translateZ(0); }
+  50%       { transform: rotate(1.5deg) translateY(-10px) translateZ(0); }
+}
+.phone-frame::before {
+  border-radius: 56px !important;
+  background:
+    linear-gradient(90deg,
+      rgba(255,255,255,.92) 0%, rgba(255,255,255,.06) 9%,
+      rgba(0,0,0,.88) 15%, transparent 19%,
+      transparent 81%, rgba(0,0,0,.82) 85%,
+      rgba(255,255,255,.18) 92%, rgba(255,255,255,.82) 100%
+    ),
+    linear-gradient(180deg,
+      rgba(255,255,255,.68) 0%, rgba(0,0,0,.20) 18%,
+      transparent 48%, rgba(0,0,0,.22) 80%,
+      rgba(255,255,255,.42) 100%
+    ) !important;
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,.50),
+    inset 0 0 0 11px rgba(3,4,9,.97),
+    inset 0 0 0 14px rgba(255,255,255,.14),
+    0 48px 110px rgba(0,0,0,.64),
+    0 0 90px var(--acc-glow2),
+    0 18px 40px rgba(0,0,0,.35) !important;
+}
+/* Dynamic Island pill */
+.phone-frame::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 3.0%;
+  width: 32%;
+  height: 4.2%;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #040508;
+  z-index: 5;
+  pointer-events: none;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.14), 0 10px 24px rgba(0,0,0,.35) !important;
+}
+.phone-screen {
+  top: 4.6% !important;
+  left: 7.2% !important;
+  width: 85.6% !important;
+  height: 90.8% !important;
+  border-radius: 44px !important;
+  padding: 56px 22px 24px !important;
+  min-height: 0 !important;
+}
+body.light-mode .phone-frame::before {
+  box-shadow:
+    inset 0 0 0 2px rgba(20,24,42,.24),
+    inset 0 0 0 11px rgba(245,247,240,.99),
+    inset 0 0 0 14px rgba(10,12,20,.12),
+    0 42px 90px rgba(20,24,42,.22),
+    0 0 80px rgba(203,255,0,.24) !important;
+}
+/* Better phone content */
+.phone-plan { font-size: 1.12rem !important; font-weight: 900 !important; letter-spacing: -.02em !important; }
+.phone-sub { font-size: .83rem !important; }
+.phone-winner small { font-weight: 900 !important; font-size: .78rem !important; }
+.phone-winner strong { font-size: 2.05rem !important; letter-spacing: -.05em !important; }
+.phone-live { font-size: .68rem !important; padding: 7px 12px !important; letter-spacing: .04em !important; }
+.phone-glow {
+  width: 360px !important; height: 360px !important;
+  opacity: .75 !important;
+  filter: blur(14px) !important;
+}
+/* Better iphone frame img filter in light mode */
+body.light-mode .iphone-frame-img {
+  filter: drop-shadow(0 36px 70px rgba(20,24,42,.22)) drop-shadow(0 0 42px rgba(203,255,0,.26)) !important;
+}
+
+/* ── 3. MICROINTERACTIONS & PREMIUM ANIMATIONS ──────── */
+/* Page entrance */
+.page-enter {
+  animation: pageEnterFinal .42s cubic-bezier(.22,1,.36,1) both !important;
+}
+@keyframes pageEnterFinal {
+  from { opacity:0; transform: translateY(30px) scale(.97); filter: blur(4px); }
+  to   { opacity:1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+/* Stagger classes */
+.s1,.s2,.s3,.s4,.s5,.s6,.s7 { animation-timing-function: cubic-bezier(.22,1,.36,1) !important; }
+
+/* Step cards - enhanced hover */
+.step-card { transition: border-color .25s, transform .32s var(--ease-spring), box-shadow .3s !important; }
+.step-card:hover { transform: translateX(8px) scale(1.008) !important; box-shadow: 0 22px 58px rgba(0,0,0,.34), 0 0 0 1px var(--bdr-glow) !important; }
+
+/* Flow icons */
+.flow-icon { transition: transform .28s var(--ease-spring), box-shadow .28s !important; }
+.flow-step:hover .flow-icon { transform: scale(1.10) rotate(-5deg) !important; box-shadow: 0 0 40px var(--acc-glow) !important; }
+
+/* Proof avatars */
+.proof-av { transition: transform .2s var(--ease-spring) !important; }
+.proof-stack:hover .proof-av:nth-child(1) { transform: translateY(-4px) scale(1.05) !important; }
+.proof-stack:hover .proof-av:nth-child(2) { transform: translateY(-6px) scale(1.08) !important; }
+.proof-stack:hover .proof-av:nth-child(3) { transform: translateY(-7px) scale(1.10) !important; }
+.proof-stack:hover .proof-av:nth-child(4) { transform: translateY(-4px) scale(1.05) !important; }
+
+/* Back button slide */
+.back-btn { transition: color .2s, transform .25s var(--ease-spring) !important; }
+.back-btn:hover { transform: translateX(-4px) !important; }
+
+/* Nav icon */
+.nav-icon { transition: transform .28s var(--ease-spring), box-shadow .28s !important; cursor: pointer; }
+.nav-icon:hover { transform: scale(1.08) rotate(-4deg) !important; box-shadow: 0 0 28px var(--acc-glow) !important; }
+
+/* Wordmark */
+.wordmark { transition: opacity .2s !important; }
+.wordmark:hover { opacity: .82 !important; }
+
+/* Invite avatar pulse */
+.invite-avatar { animation: inviteAvatarPulse 3.5s ease-in-out infinite !important; }
+@keyframes inviteAvatarPulse {
+  0%,100% { box-shadow: 0 0 0 4px var(--acc-dim), 0 0 24px var(--acc-glow2); }
+  50%      { box-shadow: 0 0 0 7px var(--acc-soft), 0 0 42px var(--acc-glow); }
+}
+
+/* Share icon celebrate */
+.share-icon-wrap {
+  animation: celebIn .7s var(--ease-spring) both, shareIconBreath 4s ease-in-out 1s infinite !important;
+}
+@keyframes shareIconBreath {
+  0%,100% { box-shadow: 0 0 60px var(--acc-glow2); }
+  50%      { box-shadow: 0 0 100px var(--acc-glow), 0 0 200px var(--acc-glow2); }
+}
+
+/* Empty live icon */
+.empty-live-icon { animation: emptyFloat 3.8s ease-in-out infinite !important; }
+@keyframes emptyFloat {
+  0%,100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-7px) scale(1.04); }
+}
+
+/* Live pill dot pulse */
+.lp-live-dot { animation: liveDotPulse 1.1s ease-in-out infinite !important; }
+@keyframes liveDotPulse {
+  0%,100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.5); opacity: .6; }
+}
+
+/* Result fill spring */
+.result-fill { transition: width 1s cubic-bezier(.34,1.26,.64,1) !important; }
+.result-track.big { height: 12px !important; }
+
+/* Result best card shine top line */
+.result-card.best::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 10%; right: 10%;
+  height: 1.5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--acc), transparent);
+  opacity: .7;
+}
+
+/* Quest/mission panel top shimmer line */
+.quest-card::after,
+.mission-panel::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1.5px;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent);
+  animation: panelLineAnim 4s ease-in-out infinite;
+  z-index: 5;
+  pointer-events: none;
+}
+@keyframes panelLineAnim {
+  0%,100% { opacity: .4; transform: scaleX(.6); }
+  50%      { opacity: 1; transform: scaleX(1); }
+}
+
+/* Btn primary extra depth */
+.btn-primary,.btn-hero {
+  transition: transform .22s var(--ease-spring), box-shadow .22s !important;
+}
+.btn-primary:hover:not(:disabled),.btn-hero:hover {
+  transform: translateY(-3px) scale(1.008) !important;
+  box-shadow: 0 18px 52px var(--acc-glow), inset 0 1px 0 rgba(255,255,255,.28) !important;
+}
+.btn-primary:active:not(:disabled),.btn-hero:active {
+  transform: scale(.965) !important;
+  box-shadow: none !important;
+}
+
+/* WA button */
+.btn-wa { background: linear-gradient(135deg, #2ee978, #23cf64) !important; }
+.btn-wa:hover:not(:disabled) { box-shadow: 0 14px 44px rgba(37,211,102,.45) !important; transform: translateY(-3px) !important; }
+
+/* Copy btn */
+.copy-btn { transition: all .22s var(--ease-spring) !important; }
+.copy-btn:hover { transform: translateY(-2px) !important; }
+.copy-btn:active { transform: scale(.92) !important; }
+
+/* Wordmark dot */
+.wordmark-dot { animation: wdotPulse 2.2s ease-in-out infinite !important; }
+@keyframes wdotPulse {
+  0%,100% { box-shadow: 0 0 8px var(--acc-glow); transform: scale(1); }
+  50%      { box-shadow: 0 0 20px var(--acc-glow), 0 0 36px var(--acc-glow2); transform: scale(1.28); }
+}
+
+/* Opt cards enhanced */
+.opt-card { transition: all .28s var(--ease-spring) !important; }
+.opt-card:hover:not(.sel) { border-color: var(--bdr-glow) !important; transform: scale(1.012) !important; }
+
+/* Section title entrance */
+.section-title { position: relative; }
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px; left: 0;
+  width: 36px; height: 3px;
+  border-radius: 999px;
+  background: var(--acc);
+  box-shadow: 0 0 12px var(--acc-glow);
+}
+
+/* Chat bubbles enhanced */
+.chat-bubble { filter: drop-shadow(0 18px 28px rgba(0,0,0,.28)) !important; }
+.chat-bubble:hover .chat-text { transform: scale(1.02); }
+.chat-text { transition: transform .25s var(--ease-spring) !important; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bdr-hi); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--acc-dim); }
+
+/* Focus visible */
+*:focus-visible {
+  outline: 2px solid var(--acc) !important;
+  outline-offset: 3px !important;
+  border-radius: 6px !important;
+  transition: outline .12s !important;
+}
+
+/* ── 4. ICON UPGRADES — Mode toggle & nav ───────────── */
+.mode-toggle span { font-size: 1.08rem !important; line-height: 1 !important; }
+.mode-toggle {
+  transition: transform .24s var(--ease-spring), border-color .24s, background .24s, box-shadow .24s !important;
+}
+.mode-toggle:hover {
+  transform: scale(1.05) rotate(12deg) !important;
+  box-shadow: 0 0 0 5px var(--acc-dim), 0 16px 36px rgba(0,0,0,.24) !important;
+}
+.mode-toggle:active { transform: scale(.88) rotate(-18deg) !important; }
+
+/* ── 5. HERO SECTION UPGRADES ──────────────────────── */
+/* Hero confetti bigger range */
+.hero-confetti i { height: 16px !important; width: 9px !important; }
+
+/* Hero badge */
+.hero-badge {
+  animation: badgeFadeUp .6s cubic-bezier(.22,1,.36,1) .08s both !important;
+  cursor: default !important;
+}
+@keyframes badgeFadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero title text-shadow for dark mode */
+body:not(.light-mode) .hero-title-v2 {
+  text-shadow: 0 16px 48px rgba(0,0,0,.28) !important;
+}
+
+/* Proof section spacing */
+.hero-proof { gap: 16px !important; }
+
+/* ── 6. RESULTS QUALITY ─────────────────────────────── */
+.result-card { transition: transform .3s var(--ease-spring), box-shadow .3s !important; }
+.result-card:hover { transform: translateY(-2px) !important; box-shadow: 0 18px 48px rgba(0,0,0,.30) !important; }
+
+.results-hero-card { transition: box-shadow .3s !important; }
+
+/* Counter number */
+.result-score {
+  transition: all .4s var(--ease-spring) !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+/* ── 7. LIVE PREVIEW CARD ──────────────────────────── */
+.lp-card { overflow: hidden !important; }
+.lp-card::after {
+  content: '';
+  position: absolute;
+  top: -1px; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--acc-glow), transparent);
+  opacity: .6;
+}
+
+/* ── 8. TYPOGRAPHY REFINEMENTS ─────────────────────── */
+.quest-step { letter-spacing: .06em !important; font-size: .70rem !important; }
+.live-metrics strong { font-variant-numeric: tabular-nums !important; }
+.result-score { font-variant-numeric: tabular-nums !important; }
+
+/* ── 9. FOOTER UPGRADE ─────────────────────────────── */
+.tropix-credit {
+  transition: transform .25s var(--ease-spring), border-color .25s, background .25s !important;
+}
+.tropix-credit:hover {
+  transform: translateY(-3px) !important;
+  border-color: rgba(255,255,255,.28) !important;
+  background: rgba(255,255,255,.11) !important;
+}
+.tropix-arrow { transition: transform .25s var(--ease-spring), color .25s !important; }
+.tropix-credit:hover .tropix-arrow { transform: translate(3px,-3px) !important; color: #fff !important; }
+
+/* ── 10. SMALL SCREEN ADJUSTMENTS ─────────────────── */
+@media (max-width: 560px) {
+  .phone-frame { width: min(342px, 92vw) !important; border-radius: 52px !important; }
+  .phone-frame::before { border-radius: 52px !important; }
+  .phone-screen { border-radius: 40px !important; }
+}
+
+/* ── 11. THEME CHIP GLOW ANIMATION ────────────────── */
+.theme-choice.on {
+  animation: themeChipGlow 2.5s ease-in-out infinite !important;
+}
+@keyframes themeChipGlow {
+  0%,100% { box-shadow: 0 0 0 3px var(--acc-dim), 0 18px 34px var(--acc-glow2); }
+  50%      { box-shadow: 0 0 0 4px var(--acc-soft), 0 20px 42px var(--acc-glow); }
+}
+
+/* ── 12. SLOT DEL BTN ───────────────────────────────── */
+.del-btn { transition: all .2s var(--ease-spring) !important; }
+.del-btn:hover { transform: scale(1.08) !important; }
+
 </style>
 </head>
 <body>
@@ -1444,15 +1930,19 @@ function waShare(url,planTitle,creatorName){
   open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
-// ── SVG ICONS ─────────────────────────────────────────
+// ── SVG ICONS — Premium set ────────────────────────────
 const I={
   wa:`<svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>`,
-  chk:`<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
-  plus:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`,
-  clk:`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
-  lnk:`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>`,
-  arr:`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`,
-  bk:`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>`,
+  chk:`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6.5L9 17.5 4 12.5"/></svg>`,
+  plus:`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/></svg>`,
+  clk:`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 7v5.25l3.5 2"/></svg>`,
+  lnk:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>`,
+  arr:`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`,
+  bk:`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>`,
+  bell:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`,
+  ref:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>`,
+  shr:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>`,
+  grp:`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
 };
 
 
@@ -1903,12 +2393,12 @@ async function vResults(id){
           <div class="theme-badge">✦ ${thName} Edition</div>
           <span class="live-pill">LIVE</span>
         </div>
-        <button class="refresh-mini" onclick="aV(()=>vResults('${id}'))">${I.clk} ${t('rf')}</button>
+        <button class="refresh-mini" onclick="aV(()=>vResults('${id}'))">${I.ref} ${t('rf')}</button>
       </div>
       <div class="results-title">${escHTML(_plan.title)}</div>
       <div class="results-sub"><strong style="color:var(--txt)">${responses.length}</strong> ${responseLabel} en vivo · ${escHTML(bestText)}</div>
       <div class="results-actions">
-        <button class="notify-btn" onclick="askNotify()">🔔 Notificarme cuando respondan</button>
+        <button class="notify-btn" onclick="askNotify()">${I.bell} Notificarme cuando respondan</button>
         <button class="notify-btn" onclick="copyL('${planLink}','copy-live-link')" id="copy-live-link">${I.lnk} Copiar link</button>
       </div>
     </section>
@@ -2004,6 +2494,126 @@ async function getPlan(id){
   try{const{data,error}=await db.from('plans').select('*').eq('id',id).single();if(error)throw error;return data;}
   catch(e){throw new Error('Plan not found');}
 }
+
+// ── PREMIUM MICROINTERACTIONS ─────────────────────────
+// 1. Phone frame tilt on mouse move
+(function initPhoneTilt(){
+  document.addEventListener('mousemove', e => {
+    const frame = document.querySelector('.phone-frame');
+    if (!frame) return;
+    const rect = frame.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = (e.clientX - cx) / (window.innerWidth * 0.5);
+    const dy = (e.clientY - cy) / (window.innerHeight * 0.5);
+    const rx = dy * 6;
+    const ry = -dx * 6;
+    frame.style.transform = `rotate(1.5deg) translateY(0) perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+  });
+  document.addEventListener('mouseleave', () => {
+    const frame = document.querySelector('.phone-frame');
+    if (frame) frame.style.transform = '';
+  });
+})();
+
+// 2. Magnetic buttons
+function initMagneticBtns() {
+  document.querySelectorAll('.btn-hero,.btn-primary,.btn-wa').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const rect = btn.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) * 0.28;
+      const dy = (e.clientY - cy) * 0.28;
+      btn.style.transform = `translate(${dx}px,${dy}px) scale(1.015)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  });
+}
+
+// 3. Cursor glow (desktop only)
+(function initCursorGlow(){
+  if (window.matchMedia('(hover:none)').matches) return;
+  const glow = document.createElement('div');
+  glow.style.cssText = `position:fixed;pointer-events:none;z-index:9998;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,var(--acc-glow2) 0%,transparent 60%);transform:translate(-50%,-50%);filter:blur(2px);transition:opacity .4s ease;opacity:0;will-change:transform;`;
+  document.body.appendChild(glow);
+  let visible = false;
+  document.addEventListener('mousemove', e => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+    if (!visible) { glow.style.opacity = '1'; visible = true; }
+  });
+  document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; visible = false; });
+})();
+
+// 4. Stagger entrance for cards
+function staggerReveal() {
+  const items = document.querySelectorAll('.step-card, .flow-step, .result-card, .opt-card');
+  items.forEach((el, i) => {
+    el.style.animationDelay = (i * 0.06) + 's';
+  });
+}
+
+// 5. Post-render hook: magnetic + stagger on every view change
+const _cuandoRenderHook = new MutationObserver(() => {
+  initMagneticBtns();
+  staggerReveal();
+});
+_cuandoRenderHook.observe(document.getElementById('app') || document.body, { childList: true, subtree: false });
+
+// 6. Button press haptic + sound-like micro vibration
+document.addEventListener('click', e => {
+  if (e.target.closest('.btn-primary,.btn-hero,.btn-wa')) {
+    haptic(12);
+  }
+}, { passive: true });
+
+// 7. Input focus micro-animation
+document.addEventListener('focusin', e => {
+  if (e.target.tagName === 'INPUT') {
+    e.target.style.transition = 'box-shadow .22s,border-color .18s,transform .2s';
+    e.target.style.transform = 'scale(1.01)';
+  }
+});
+document.addEventListener('focusout', e => {
+  if (e.target.tagName === 'INPUT') {
+    e.target.style.transform = '';
+  }
+});
+
+// 8. Theme pick ripple enhancement — patch setThemeChoice
+const _origSetThemeChoice = setThemeChoice;
+setThemeChoice = function(id) {
+  haptic(8);
+  _origSetThemeChoice(id);
+  const chips = document.querySelectorAll('.theme-choice');
+  chips.forEach((c, k) => {
+    if (k === Number(id)) {
+      c.animate([
+        { transform: 'scale(1)' },
+        { transform: 'scale(.90)' },
+        { transform: 'scale(1.06)' },
+        { transform: 'scale(1)' },
+      ], { duration: 380, easing: 'cubic-bezier(.34,1.56,.64,1)' });
+    }
+  });
+};
+
+// 9. Scroll progress indicator
+(function initScrollProgress(){
+  const bar = document.createElement('div');
+  bar.style.cssText = `position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--acc),#00E28A);z-index:9999;pointer-events:none;transition:width .1s linear;border-radius:0 999px 999px 0;`;
+  document.body.appendChild(bar);
+  window.addEventListener('scroll', () => {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = total > 0 ? Math.round((window.scrollY / total) * 100) : 0;
+    bar.style.width = pct + '%';
+    bar.style.opacity = pct > 2 ? '1' : '0';
+  }, { passive: true });
+})();
+
 </script>
 </body>
 </html>
