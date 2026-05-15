@@ -1523,6 +1523,723 @@ body:not(.light-mode) .hero-title-v2 {
 .del-btn { transition: all .2s var(--ease-spring) !important; }
 .del-btn:hover { transform: scale(1.08) !important; }
 
+
+
+/* ═══════════════════════════════════════════════════
+   PATCH v7.4 · Phone hero real frame correction
+   - El PNG ya no tapa la UI: se usa frame con centro transparente.
+   - El texto interno queda más grande, cercano, nítido y alineado.
+   - Se elimina el fondo/glow pesado detrás del móvil.
+════════════════════════════════════════════════════ */
+
+.hero-phone-zone{
+  min-height:650px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:visible!important;
+}
+
+.phone-glow{
+  display:none!important;
+}
+
+.phone-frame{
+  width:min(430px,96vw)!important;
+  aspect-ratio:430/880!important;
+  margin:0 auto!important;
+  padding:0!important;
+  border-radius:56px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:rotate(0deg) translateZ(0)!important;
+  overflow:visible!important;
+  isolation:isolate!important;
+}
+
+/* Quitamos las capas CSS que estaban poniendo un “vidrio” oscuro encima del texto */
+.phone-frame::before,
+.phone-frame::after{
+  display:none!important;
+  content:none!important;
+}
+
+.iphone-frame-img{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  z-index:8!important;
+  opacity:1!important;
+  pointer-events:none!important;
+  user-select:none!important;
+  -webkit-user-drag:none!important;
+  filter:
+    drop-shadow(0 34px 72px rgba(0,0,0,.55))
+    drop-shadow(0 0 34px rgba(203,255,0,.20))!important;
+}
+
+/* Pantalla real debajo del frame: ahora coincide con el centro transparente del PNG */
+.phone-screen{
+  position:absolute!important;
+  top:8.45%!important;
+  left:14.65%!important;
+  width:70.7%!important;
+  height:84.35%!important;
+  min-height:0!important;
+  border-radius:38px!important;
+  padding:72px 26px 30px!important;
+  z-index:2!important;
+  overflow:hidden!important;
+  color:#fff!important;
+  background:
+    radial-gradient(circle at 50% 4%,rgba(203,255,0,.15),transparent 30%),
+    linear-gradient(180deg,#0b0d16 0%,#05060c 100%)!important;
+  border:0!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.06),
+    inset 0 16px 38px rgba(255,255,255,.035),
+    inset 0 -30px 70px rgba(0,0,0,.55)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+body.light-mode .phone-screen{
+  color:#0A0C12!important;
+  background:
+    radial-gradient(circle at 50% 4%,rgba(203,255,0,.25),transparent 30%),
+    linear-gradient(180deg,#FFFFFF 0%,#F6F8EF 100%)!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(8,10,18,.07),
+    inset 0 -24px 60px rgba(20,24,42,.045)!important;
+}
+
+/* Barra superior dentro del teléfono */
+.phone-top{
+  position:absolute!important;
+  top:28px!important;
+  left:26px!important;
+  right:26px!important;
+  margin:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  color:currentColor!important;
+  opacity:.88!important;
+  font-size:1.18rem!important;
+  z-index:4!important;
+}
+
+.phone-menu{
+  width:25px!important;
+  height:18px!important;
+  gap:5px!important;
+}
+
+.phone-menu span{
+  height:2px!important;
+  background:currentColor!important;
+  border-radius:99px!important;
+}
+
+/* Texto principal: más cerca, grande y nítido */
+.phone-plan{
+  position:relative!important;
+  z-index:3!important;
+  font-size:1.34rem!important;
+  line-height:1.08!important;
+  font-weight:900!important;
+  letter-spacing:-.035em!important;
+  margin:0 92px 4px 0!important;
+  color:currentColor!important;
+  text-shadow:none!important;
+  filter:none!important;
+}
+
+.phone-sub{
+  position:relative!important;
+  z-index:3!important;
+  font-size:.92rem!important;
+  line-height:1.3!important;
+  color:rgba(255,255,255,.60)!important;
+  margin:0 92px 18px 0!important;
+  text-shadow:none!important;
+  filter:none!important;
+}
+
+body.light-mode .phone-sub{
+  color:#6E7484!important;
+}
+
+.phone-live{
+  top:68px!important;
+  right:26px!important;
+  z-index:5!important;
+  font-size:.70rem!important;
+  padding:8px 12px!important;
+  border-radius:999px!important;
+  color:#061006!important;
+  background:var(--acc)!important;
+  box-shadow:0 0 24px rgba(203,255,0,.42)!important;
+  text-shadow:none!important;
+}
+
+/* Card ganador más legible */
+.phone-winner{
+  position:relative!important;
+  z-index:3!important;
+  margin:16px 0 20px!important;
+  padding:22px 20px!important;
+  border-radius:25px!important;
+  background:
+    radial-gradient(circle at 78% 18%,rgba(203,255,0,.14),transparent 34%),
+    linear-gradient(180deg,rgba(203,255,0,.105),rgba(255,255,255,.025))!important;
+  border:1px solid rgba(203,255,0,.28)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07),
+    0 16px 34px rgba(0,0,0,.16)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+.phone-winner small{
+  font-size:.94rem!important;
+  line-height:1.1!important;
+  font-weight:900!important;
+  color:var(--acc)!important;
+}
+
+.phone-winner strong{
+  display:block!important;
+  font-size:2.45rem!important;
+  line-height:.94!important;
+  letter-spacing:-.06em!important;
+  margin-top:10px!important;
+  color:currentColor!important;
+  text-shadow:none!important;
+  filter:none!important;
+}
+
+.crown{
+  right:18px!important;
+  top:58px!important;
+  font-size:1.55rem!important;
+  z-index:4!important;
+}
+
+/* Resultados: texto más cerca y barras limpias */
+.phone-results{
+  position:relative!important;
+  z-index:3!important;
+  gap:16px!important;
+}
+
+.phone-results .lp-opt{
+  display:grid!important;
+  grid-template-columns:1fr auto!important;
+  gap:8px 12px!important;
+  padding:0!important;
+  margin:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+
+.phone-results .lp-label{
+  color:currentColor!important;
+  font-size:1.02rem!important;
+  line-height:1.1!important;
+  font-weight:900!important;
+}
+
+.phone-results .lp-count{
+  font-size:1rem!important;
+  font-weight:900!important;
+  color:var(--acc)!important;
+}
+
+.phone-results .lp-bar-wrap{
+  grid-column:1/-1!important;
+  width:100%!important;
+  height:8px!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.12)!important;
+  overflow:hidden!important;
+}
+
+body.light-mode .phone-results .lp-bar-wrap{
+  background:rgba(8,10,18,.10)!important;
+}
+
+.phone-results .lp-bar{
+  height:100%!important;
+  border-radius:999px!important;
+  background:linear-gradient(90deg,var(--acc),#89FF00)!important;
+  box-shadow:0 0 14px rgba(203,255,0,.42)!important;
+}
+
+.phone-cta{
+  left:26px!important;
+  right:26px!important;
+  bottom:30px!important;
+  height:58px!important;
+  border-radius:22px!important;
+  z-index:4!important;
+  background:rgba(255,255,255,.06)!important;
+  border:1px solid rgba(255,255,255,.15)!important;
+  color:currentColor!important;
+  font-size:1rem!important;
+  font-weight:900!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+body.light-mode .phone-cta{
+  background:#FFFFFF!important;
+  border-color:rgba(8,10,18,.12)!important;
+  box-shadow:0 12px 26px rgba(20,24,42,.08)!important;
+}
+
+/* Las burbujas siguen afuera, no tapando el texto del teléfono */
+.chat-bubble{
+  z-index:10!important;
+  filter:drop-shadow(0 16px 26px rgba(0,0,0,.28))!important;
+}
+
+.chat-a{left:-76px!important;top:118px!important;}
+.chat-b{right:-84px!important;top:185px!important;}
+.chat-c{left:-70px!important;bottom:122px!important;}
+.chat-d{right:-70px!important;bottom:128px!important;}
+
+/* Móvil: centrado y grande, pero sin cortar el texto */
+@media(max-width:560px){
+  .hero-phone-zone{
+    min-height:610px!important;
+    margin-top:4px!important;
+  }
+
+  .phone-frame{
+    width:min(382px,98vw)!important;
+  }
+
+  .phone-screen{
+    top:8.45%!important;
+    left:14.65%!important;
+    width:70.7%!important;
+    height:84.35%!important;
+    border-radius:34px!important;
+    padding:66px 22px 26px!important;
+  }
+
+  .phone-top{
+    top:24px!important;
+    left:22px!important;
+    right:22px!important;
+  }
+
+  .phone-plan{
+    font-size:1.18rem!important;
+    margin-right:76px!important;
+  }
+
+  .phone-sub{
+    font-size:.82rem!important;
+    margin-right:76px!important;
+    margin-bottom:15px!important;
+  }
+
+  .phone-live{
+    top:63px!important;
+    right:22px!important;
+    font-size:.62rem!important;
+    padding:7px 10px!important;
+  }
+
+  .phone-winner{
+    padding:19px 17px!important;
+    border-radius:22px!important;
+    margin-bottom:17px!important;
+  }
+
+  .phone-winner small{
+    font-size:.82rem!important;
+  }
+
+  .phone-winner strong{
+    font-size:2.05rem!important;
+  }
+
+  .crown{
+    top:52px!important;
+    right:15px!important;
+    font-size:1.35rem!important;
+  }
+
+  .phone-results{
+    gap:13px!important;
+  }
+
+  .phone-results .lp-label{
+    font-size:.88rem!important;
+  }
+
+  .phone-results .lp-count{
+    font-size:.88rem!important;
+  }
+
+  .phone-results .lp-bar-wrap{
+    height:7px!important;
+  }
+
+  .phone-cta{
+    left:22px!important;
+    right:22px!important;
+    bottom:26px!important;
+    height:52px!important;
+    border-radius:19px!important;
+    font-size:.88rem!important;
+  }
+
+  .chat-bubble{
+    max-width:128px!important;
+    grid-template-columns:28px 1fr!important;
+    transform:scale(.86)!important;
+  }
+
+  .chat-bubble .chat-av{
+    width:31px!important;
+    height:31px!important;
+    font-size:.68rem!important;
+  }
+
+  .chat-bubble .chat-text{
+    font-size:.68rem!important;
+    padding:8px 9px!important;
+    border-radius:13px!important;
+  }
+
+  .chat-bubble b{
+    left:22px!important;
+    bottom:-7px!important;
+  }
+
+  .chat-a{left:-28px!important;top:96px!important;}
+  .chat-b{right:-34px!important;top:166px!important;}
+  .chat-c{left:-28px!important;bottom:120px!important;}
+  .chat-d{right:-30px!important;bottom:124px!important;}
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   CUÁNDO — iPhone Frame Fix v8.2 (Patch final)
+   Fixes: frame invisible, texto no visible, z-index
+════════════════════════════════════════════════════════ */
+
+/* 1. Re-enable CSS frame so phone works with or without PNG */
+.phone-frame::before,
+.phone-frame::after {
+  display: block !important;
+  content: '' !important;
+}
+
+/* 2. Phone frame: tamaño real, aspecto iPhone 14 Pro */
+.phone-frame {
+  width: min(420px, 92vw) !important;
+  aspect-ratio: 393 / 852 !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  border-radius: 54px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: rotate(1.2deg) translateZ(0) !important;
+  overflow: visible !important;
+  isolation: isolate !important;
+  position: relative !important;
+}
+
+/* 3. CSS titanium frame effect (sides + top/bottom glints) */
+.phone-frame::before {
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 54px !important;
+  z-index: 3 !important;
+  pointer-events: none !important;
+  background:
+    /* Lateral glints */
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.75) 0%,
+      rgba(255,255,255,.04) 7%,
+      transparent 13%,
+      transparent 87%,
+      rgba(255,255,255,.04) 93%,
+      rgba(255,255,255,.65) 100%
+    ),
+    /* Top/bottom glints */
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.58) 0%,
+      transparent 10%,
+      transparent 90%,
+      rgba(255,255,255,.32) 100%
+    ) !important;
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,.42),
+    inset 0 0 0 11px rgba(3,4,10,.98),
+    inset 0 0 0 14px rgba(255,255,255,.12),
+    0 48px 110px rgba(0,0,0,.65),
+    0 0 90px var(--acc-glow2),
+    0 18px 40px rgba(0,0,0,.38) !important;
+}
+
+/* 4. Dynamic Island */
+.phone-frame::after {
+  position: absolute !important;
+  left: 50% !important;
+  top: 2.8% !important;
+  width: 30% !important;
+  height: 3.8% !important;
+  transform: translateX(-50%) !important;
+  border-radius: 999px !important;
+  background: #030407 !important;
+  z-index: 5 !important;
+  pointer-events: none !important;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,.16), 0 10px 24px rgba(0,0,0,.40) !important;
+}
+
+/* 5. Screen: z-index 4 so it sits ABOVE ::before (3) but BELOW ::after (5) and PNG (8) */
+.phone-screen {
+  position: absolute !important;
+  top: 4.5% !important;
+  left: 6.8% !important;
+  width: 86.4% !important;
+  height: 91.0% !important;
+  min-height: 0 !important;
+  border-radius: 44px !important;
+  padding: 62px 22px 24px !important;
+  z-index: 4 !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  color: #FAFAF6 !important;
+  background:
+    radial-gradient(circle at 50% 4%, rgba(203,255,0,.16), transparent 32%),
+    linear-gradient(180deg, #0d0f1c 0%, #060810 100%) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.07),
+    inset 0 18px 42px rgba(255,255,255,.03),
+    inset 0 -32px 72px rgba(0,0,0,.55) !important;
+}
+
+/* 6. Light mode screen */
+body.light-mode .phone-screen {
+  color: #080A12 !important;
+  background:
+    radial-gradient(circle at 50% 4%, rgba(203,255,0,.22), transparent 30%),
+    linear-gradient(180deg, #FFFFFF 0%, #F4F6ED 100%) !important;
+}
+
+/* 7. Phone glow — make it visible again */
+.phone-glow {
+  display: block !important;
+  width: 340px !important;
+  height: 340px !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle, var(--acc-glow), transparent 65%) !important;
+  filter: blur(14px) !important;
+  opacity: .72 !important;
+  position: absolute !important;
+  animation: phoneGlow 4.4s ease-in-out infinite !important;
+}
+
+/* 8. All text elements INSIDE phone: explicit colors */
+.phone-top {
+  position: absolute !important;
+  top: 24px !important;
+  left: 22px !important;
+  right: 22px !important;
+  margin: 0 !important;
+  color: rgba(250,250,246,.82) !important;
+  font-size: 1.1rem !important;
+  z-index: 4 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+body.light-mode .phone-top { color: rgba(8,10,18,.72) !important; }
+
+.phone-plan {
+  color: #FAFAF6 !important;
+  font-weight: 900 !important;
+  font-size: 1.1rem !important;
+  letter-spacing: -.022em !important;
+  margin-bottom: 4px !important;
+  line-height: 1.2 !important;
+}
+body.light-mode .phone-plan { color: #080A12 !important; }
+
+.phone-sub {
+  color: rgba(250,250,246,.62) !important;
+  font-size: .82rem !important;
+  margin-bottom: 14px !important;
+  line-height: 1.35 !important;
+}
+body.light-mode .phone-sub { color: rgba(8,10,18,.55) !important; }
+
+.phone-live {
+  position: absolute !important;
+  right: 22px !important;
+  top: 72px !important;
+  z-index: 5 !important;
+  font-size: .64rem !important;
+  font-weight: 900 !important;
+  letter-spacing: .04em !important;
+  color: #07100B !important;
+  background: var(--acc) !important;
+  border-radius: 999px !important;
+  padding: 6px 12px !important;
+  box-shadow: 0 0 24px var(--acc-glow) !important;
+}
+
+.phone-winner {
+  position: relative !important;
+  margin: 0 0 16px !important;
+  padding: 16px !important;
+  border-radius: 22px !important;
+  background:
+    radial-gradient(circle at 80% 20%, var(--acc-glow2), transparent 36%),
+    linear-gradient(180deg, var(--acc-dim), rgba(255,255,255,.025)) !important;
+  border: 1px solid var(--bdr-glow) !important;
+  z-index: 3 !important;
+}
+.phone-winner small {
+  display: block !important;
+  color: var(--acc) !important;
+  font-weight: 900 !important;
+  font-size: .76rem !important;
+  letter-spacing: .06em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 6px !important;
+}
+.phone-winner strong {
+  display: block !important;
+  font-family: 'Bricolage Grotesque', sans-serif !important;
+  font-size: 1.85rem !important;
+  line-height: 1.0 !important;
+  letter-spacing: -.05em !important;
+  color: #FAFAF6 !important;
+}
+body.light-mode .phone-winner strong { color: #080A12 !important; }
+.crown {
+  position: absolute !important;
+  right: 16px !important;
+  top: 14px !important;
+  color: var(--acc) !important;
+  font-size: 1.45rem !important;
+  z-index: 4 !important;
+  filter: drop-shadow(0 0 12px var(--acc-glow)) !important;
+}
+
+.phone-results { display: grid !important; gap: 11px !important; z-index: 3 !important; position: relative !important; }
+.phone-results .lp-opt {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+  display: grid !important;
+  grid-template-columns: 1fr auto !important;
+  gap: 5px 10px !important;
+}
+.phone-results .lp-label { font-weight: 800 !important; color: rgba(250,250,246,.9) !important; font-size: .86rem !important; }
+body.light-mode .phone-results .lp-label { color: rgba(8,10,18,.85) !important; }
+.phone-results .lp-count { font-size: .82rem !important; font-weight: 900 !important; color: var(--acc) !important; }
+.phone-results .lp-bar-wrap {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  height: 7px !important;
+  background: rgba(255,255,255,.13) !important;
+  border-radius: 999px !important;
+  overflow: hidden !important;
+}
+body.light-mode .phone-results .lp-bar-wrap { background: rgba(8,10,18,.10) !important; }
+.phone-results .lp-bar {
+  height: 7px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, var(--acc), #8DFF00) !important;
+  box-shadow: 0 0 14px var(--acc-glow) !important;
+}
+
+.phone-cta {
+  position: absolute !important;
+  left: 22px !important;
+  right: 22px !important;
+  bottom: 22px !important;
+  height: 50px !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  background: rgba(255,255,255,.07) !important;
+  color: rgba(250,250,246,.88) !important;
+  font-weight: 900 !important;
+  font-size: .88rem !important;
+  cursor: pointer !important;
+  font-family: 'DM Sans', sans-serif !important;
+  z-index: 5 !important;
+}
+body.light-mode .phone-cta {
+  background: rgba(255,255,255,.82) !important;
+  color: #080A12 !important;
+  border-color: rgba(8,10,18,.10) !important;
+}
+
+/* 9. iPhone PNG: keep it on top if it exists */
+.iphone-frame-img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  z-index: 8 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+  filter:
+    drop-shadow(0 36px 78px rgba(0,0,0,.58))
+    drop-shadow(0 0 36px var(--acc-glow2)) !important;
+}
+
+/* 10. Phone frame float animation (restore) */
+.phone-frame {
+  animation: phoneFrameFloat 6s ease-in-out infinite !important;
+  transform-origin: center bottom !important;
+}
+@keyframes phoneFrameFloat {
+  0%, 100% { transform: rotate(1.2deg) translateY(0) translateZ(0); }
+  50%       { transform: rotate(1.2deg) translateY(-11px) translateZ(0); }
+}
+
+/* 11. Responsive */
+@media (max-width: 680px) {
+  .phone-frame {
+    width: min(348px, 94vw) !important;
+    border-radius: 50px !important;
+  }
+  .phone-frame::before { border-radius: 50px !important; }
+  .phone-screen {
+    border-radius: 40px !important;
+    padding: 56px 19px 22px !important;
+  }
+  .phone-winner strong { font-size: 1.68rem !important; }
+}
+@media (max-width: 400px) {
+  .phone-frame { width: min(310px, 98vw) !important; border-radius: 46px !important; }
+  .phone-frame::before { border-radius: 46px !important; }
+  .phone-screen { border-radius: 37px !important; padding: 52px 17px 20px !important; }
+}
+
 </style>
 </head>
 <body>
@@ -1967,7 +2684,7 @@ function siteFooter(){
   return `<footer class="cuando-footer">
     <div class="cuando-footer-inner">
       <div class="cuando-copy">© ${year} <strong>CUÁNDO</strong> — App social para decidir rápido.</div>
-      <div class="cuando-center">Social scheduling OS</div>
+      <div class="cuando-center">Sistema para coordinar planes con amigos</div>
       <a class="tropix-credit" href="https://www.instagram.com/tropix.studio" target="_blank" rel="noopener">
         <svg class="tropix-ig-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <defs><linearGradient id="ig-grad-cuando" x1="0" y1="24" x2="24" y2="0"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs>
@@ -2111,7 +2828,7 @@ function vHome(){
     <div class="visual-copy">
       <div class="visual-kicker">✦ App real, flujo real</div>
       <h2>${lang==='es'?'Del chat al mejor horario.':'From chat to the best time.'}</h2>
-      <p>${lang==='es'?'Las imágenes de /img se usan como apoyo visual para que la experiencia se sienta social, móvil y lista para compartir.':'The /img assets support the social, mobile, share-ready experience.'}</p>
+      <p>${lang==='es'?'Crea un plan, comparte el link por WhatsApp y deja que todos voten su mejor hora. Sin cuentas, sin estrés y en segundos.':'Create a plan, share the link on WhatsApp, and let everyone vote for their best time. No accounts, no stress, in seconds.'}</p>
     </div>
     <div class="visual-grid">
       <figure class="visual-card visual-wide"><img src="./img/lifestyle.jpg" alt="Amigos coordinando desde el móvil" loading="lazy"><figcaption>${lang==='es'?'Grupo coordinando':'Coordinating group'}</figcaption></figure>
