@@ -15,7 +15,9 @@
 <meta name="twitter:image" content="./img/og.jpg">
 <link rel="apple-touch-icon" href="./img/tropix.png">
 <title>CUÁNDO</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js">
+<!-- FIXED: icons undefined + clean input icons + Supabase script tag -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
 /* ── MEGA CONFETTI ─────────────────────────────────── */
 function megaConfetti(){
   const c=document.getElementById('confetti-canvas');if(!c)return;
@@ -75,13 +77,6 @@ function megaConfetti(){
   }, 400);
   setTimeout(()=>{cancelAnimationFrame(raf);ctx.clearRect(0,0,c.width,c.height);},7000);
 }
-
-/* Reset create step on go() */
-const _origGo = go;
-go = function(h) {
-  if(!h || h==='' || h==='/') window._createStep = 0;
-  _origGo(h);
-};
 
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2665,6 +2660,420 @@ body.light-mode .share-plan-name {
   background: rgba(8,10,18,.05); border-color: rgba(8,10,18,.08); color: var(--txt2);
 }
 
+
+
+/* ── HARD FIX · remove undefined labels and clean create/share icons ── */
+.create-kicker svg,
+.btn svg,
+.add-slot-btn svg,
+.cp-back svg,
+.cp-next svg,
+.notify-btn svg,
+.refresh-mini svg,
+.copy-btn svg{width:1em;height:1em;display:inline-block;vertical-align:-.14em;flex-shrink:0;}
+.cp-icon,
+.share-card-icon{
+  font-size:0!important;
+  line-height:0!important;
+  overflow:hidden!important;
+  display:grid!important;
+  place-items:center!important;
+  flex-shrink:0!important;
+}
+.cp-icon svg,
+.share-card-icon svg,
+.sci-inner svg,
+.opt-ring svg{display:block!important;flex-shrink:0!important;}
+.cp-icon svg,.share-card-icon svg{width:20px!important;height:20px!important;}
+/* Inputs: no decorative icon over the text. Cleaner and more premium. */
+.cf-input-wrap{position:relative!important;display:block!important;}
+.cf-icon-left{display:none!important;}
+.cf-input{
+  display:block!important;
+  width:100%!important;
+  padding-left:20px!important;
+  padding-right:78px!important;
+  min-height:54px!important;
+  line-height:1.25!important;
+  text-indent:0!important;
+}
+#creator-name.cf-input{padding-left:20px!important;padding-right:22px!important;}
+.cf-char-count{right:18px!important;z-index:3!important;}
+.share-celebration{padding-top:38px!important;}
+.share-cel-icon{display:grid!important;place-items:center!important;font-size:0!important;line-height:0!important;overflow:hidden!important;}
+.sci-inner{display:grid!important;place-items:center!important;width:100%!important;height:100%!important;font-size:0!important;line-height:0!important;}
+.share-cel-title{display:block!important;text-align:center!important;line-height:1.04!important;word-break:normal!important;overflow-wrap:normal!important;text-wrap:balance;}
+.theme-badge,.share-plan-name{min-height:28px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;}
+.theme-badge{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;}
+@media(max-width:560px){
+  .cf-input{padding-left:18px!important;padding-right:72px!important;font-size:1rem!important;}
+  #creator-name.cf-input{padding-left:18px!important;padding-right:20px!important;}
+  .share-cel-title{font-size:clamp(2.05rem,9.4vw,2.55rem)!important;line-height:1.02!important;max-width:370px!important;margin-left:auto!important;margin-right:auto!important;}
+  .share-card-head{align-items:center!important;gap:12px!important;}
+}
+
+
+
+/* ── FINAL VISUAL FIX · input icons restored + share hero animation cleaned ── */
+.cf-input-wrap{
+  position:relative!important;
+  display:block!important;
+}
+.cf-icon-left{
+  display:flex!important;
+  position:absolute!important;
+  left:18px!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+  width:19px!important;
+  height:19px!important;
+  align-items:center!important;
+  justify-content:center!important;
+  color:var(--txt3)!important;
+  opacity:.9!important;
+  z-index:4!important;
+  pointer-events:none!important;
+}
+.cf-icon-left svg{
+  width:18px!important;
+  height:18px!important;
+  display:block!important;
+}
+.cf-input{
+  padding-left:54px!important;
+  padding-right:78px!important;
+}
+#creator-name.cf-input{
+  padding-left:54px!important;
+  padding-right:22px!important;
+}
+.cf-input::placeholder{
+  opacity:.82!important;
+}
+
+.share-celebration{
+  padding:46px 24px 34px!important;
+  min-height:296px!important;
+}
+.share-cel-rings{
+  inset:auto!important;
+  position:absolute!important;
+  left:50%!important;
+  top:36px!important;
+  width:0!important;
+  height:0!important;
+  transform:translateX(-50%)!important;
+  z-index:1!important;
+  pointer-events:none!important;
+  overflow:visible!important;
+  display:none!important;
+}
+.scr{
+  left:50%!important;
+  top:50%!important;
+}
+.scr-1{width:64px!important;height:64px!important;opacity:.28!important;}
+.scr-2{width:106px!important;height:106px!important;opacity:.16!important;}
+.scr-3{width:148px!important;height:148px!important;opacity:.08!important;}
+.share-cel-icon{
+  width:76px!important;
+  height:76px!important;
+  border-radius:24px!important;
+  margin:0 auto 30px!important;
+  position:relative!important;
+  z-index:3!important;
+  overflow:visible!important;
+}
+.share-cel-icon::before{
+  content:'';
+  position:absolute;
+  inset:-8px;
+  border-radius:28px;
+  border:1px solid var(--bdr-glow);
+  opacity:.55;
+  animation:shareIconHalo 2.8s ease-in-out infinite;
+  pointer-events:none;
+}
+.share-cel-icon::after{
+  content:'';
+  position:absolute;
+  inset:-18px;
+  border-radius:36px;
+  background:radial-gradient(circle,var(--acc-glow2),transparent 68%);
+  opacity:.55;
+  animation:shareIconGlow 3.4s ease-in-out infinite;
+  pointer-events:none;
+  z-index:-1;
+}
+@keyframes shareIconHalo{
+  0%,100%{transform:scale(.96);opacity:.38;}
+  50%{transform:scale(1.08);opacity:.72;}
+}
+@keyframes shareIconGlow{
+  0%,100%{transform:scale(.94);opacity:.36;}
+  50%{transform:scale(1.05);opacity:.64;}
+}
+.sci-inner{
+  animation:shareIconPulse 3.2s ease-in-out infinite!important;
+}
+@keyframes shareIconPulse{
+  0%,100%{transform:translateY(0) scale(1);}
+  50%{transform:translateY(-3px) scale(1.045);}
+}
+.share-cel-text{
+  position:relative!important;
+  z-index:4!important;
+  margin-bottom:18px!important;
+}
+.share-cel-title{
+  max-width:620px!important;
+  margin:0 auto 10px!important;
+  line-height:1.10!important;
+  letter-spacing:-.045em!important;
+  font-size:clamp(1.75rem,5.3vw,2.55rem)!important;
+}
+.share-cel-sub{
+  max-width:440px!important;
+  margin:0 auto!important;
+}
+.share-cel-meta{
+  position:relative!important;
+  z-index:4!important;
+}
+@media(max-width:560px){
+  .cf-icon-left{left:17px!important;width:18px!important;height:18px!important;}
+  .cf-icon-left svg{width:17px!important;height:17px!important;}
+  .cf-input{padding-left:50px!important;padding-right:72px!important;}
+  #creator-name.cf-input{padding-left:50px!important;padding-right:20px!important;}
+  .share-celebration{padding:42px 18px 32px!important;min-height:286px!important;}
+  .share-cel-icon{width:72px!important;height:72px!important;margin-bottom:28px!important;}
+  .share-cel-title{font-size:clamp(1.65rem,8vw,2.35rem)!important;}
+  .share-cel-rings{top:32px!important;width:148px!important;height:148px!important;}
+}
+
+
+/* ── REAL FINAL PATCH · 2026-05-15 · input icons + organized share hero ── */
+/* Inputs: keep the icons, but give the text real breathing room */
+.cf-input-wrap{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+}
+.cf-icon-left{
+  display:grid!important;
+  place-items:center!important;
+  position:absolute!important;
+  left:18px!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+  width:22px!important;
+  height:22px!important;
+  color:var(--txt3)!important;
+  opacity:.82!important;
+  z-index:5!important;
+  pointer-events:none!important;
+  font-size:0!important;
+  line-height:0!important;
+}
+.cf-icon-left svg{
+  width:18px!important;
+  height:18px!important;
+  display:block!important;
+  flex-shrink:0!important;
+}
+.cf-input{
+  padding-left:58px!important;
+  padding-right:78px!important;
+  text-indent:0!important;
+  line-height:1.25!important;
+  min-height:54px!important;
+}
+#creator-name.cf-input{
+  padding-left:58px!important;
+  padding-right:22px!important;
+}
+.cf-input::placeholder{
+  opacity:.82!important;
+}
+.cf-char-count{
+  right:18px!important;
+  z-index:6!important;
+}
+
+/* Share hero: remove messy orbit/confetti look and keep only a controlled premium icon animation */
+.share-celebration{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:0!important;
+  min-height:300px!important;
+  padding:38px 24px 34px!important;
+  margin:0 0 20px!important;
+  border-radius:0 0 34px 34px!important;
+  text-align:center!important;
+}
+.share-cel-bg{
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  opacity:.82!important;
+  background:
+    radial-gradient(circle at 50% 18%, var(--acc-glow2), transparent 30%),
+    radial-gradient(circle at 18% 82%, rgba(0,226,138,.12), transparent 34%),
+    linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.018))!important;
+  background-size:auto!important;
+  -webkit-mask-image:none!important;
+  mask-image:none!important;
+}
+.share-cel-rings,
+.scr,
+.scr-1,
+.scr-2,
+.scr-3{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  animation:none!important;
+}
+.share-cel-icon{
+  position:relative!important;
+  z-index:3!important;
+  width:76px!important;
+  height:76px!important;
+  border-radius:24px!important;
+  margin:0 auto 26px!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:visible!important;
+  background:
+    radial-gradient(circle at 32% 25%, rgba(255,255,255,.18), transparent 38%),
+    linear-gradient(135deg, var(--acc-dim), rgba(255,255,255,.045))!important;
+  border:1px solid var(--bdr-glow)!important;
+  box-shadow:0 0 0 8px var(--acc-dim), 0 22px 58px var(--acc-glow2)!important;
+  animation:shareIconSettle .55s cubic-bezier(.34,1.56,.64,1) both!important;
+  font-size:0!important;
+  line-height:0!important;
+}
+.share-cel-icon::before{
+  content:''!important;
+  position:absolute!important;
+  inset:-9px!important;
+  border-radius:30px!important;
+  border:1px solid var(--bdr-glow)!important;
+  opacity:.42!important;
+  animation:shareCleanHalo 2.8s ease-in-out infinite!important;
+  pointer-events:none!important;
+}
+.share-cel-icon::after{
+  content:''!important;
+  position:absolute!important;
+  inset:-20px!important;
+  border-radius:38px!important;
+  background:radial-gradient(circle, var(--acc-glow2), transparent 66%)!important;
+  opacity:.45!important;
+  z-index:-1!important;
+  animation:shareCleanGlow 3.2s ease-in-out infinite!important;
+  pointer-events:none!important;
+}
+.sci-inner{
+  display:grid!important;
+  place-items:center!important;
+  width:100%!important;
+  height:100%!important;
+  animation:shareIconFloat 3.1s ease-in-out infinite!important;
+  transform-origin:center!important;
+  font-size:0!important;
+  line-height:0!important;
+}
+.sci-inner svg{
+  width:38px!important;
+  height:38px!important;
+  display:block!important;
+  color:var(--acc)!important;
+  filter:drop-shadow(0 0 14px var(--acc-glow))!important;
+}
+.share-cel-text{
+  position:relative!important;
+  z-index:4!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  margin:0 0 18px!important;
+  width:100%!important;
+}
+.share-cel-title{
+  display:block!important;
+  max-width:680px!important;
+  margin:0 auto 10px!important;
+  padding:0!important;
+  text-align:center!important;
+  line-height:1.08!important;
+  letter-spacing:-.045em!important;
+  font-size:clamp(2.05rem,5.2vw,3.05rem)!important;
+  word-break:normal!important;
+  overflow-wrap:normal!important;
+  text-wrap:balance!important;
+  transform:none!important;
+}
+.share-cel-sub{
+  max-width:480px!important;
+  margin:0 auto!important;
+  text-align:center!important;
+  line-height:1.55!important;
+  transform:none!important;
+}
+.share-cel-meta{
+  position:relative!important;
+  z-index:4!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:10px!important;
+  flex-wrap:wrap!important;
+  margin:0!important;
+}
+.theme-badge,.share-plan-name{
+  min-height:28px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  max-width:min(260px,84vw)!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+@keyframes shareIconSettle{
+  from{opacity:0;transform:translateY(10px) scale(.82)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes shareCleanHalo{
+  0%,100%{transform:scale(.96);opacity:.30}
+  50%{transform:scale(1.07);opacity:.58}
+}
+@keyframes shareCleanGlow{
+  0%,100%{transform:scale(.96);opacity:.32}
+  50%{transform:scale(1.05);opacity:.56}
+}
+@keyframes shareIconFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-3px)}
+}
+@media(max-width:560px){
+  .cf-icon-left{left:17px!important;width:21px!important;height:21px!important;}
+  .cf-icon-left svg{width:17px!important;height:17px!important;}
+  .cf-input{padding-left:54px!important;padding-right:72px!important;font-size:1rem!important;}
+  #creator-name.cf-input{padding-left:54px!important;padding-right:20px!important;}
+  .share-celebration{min-height:292px!important;padding:36px 18px 32px!important;}
+  .share-cel-icon{width:72px!important;height:72px!important;margin-bottom:24px!important;}
+  .sci-inner svg{width:34px!important;height:34px!important;}
+  .share-cel-title{font-size:clamp(2.15rem,8.8vw,2.75rem)!important;line-height:1.06!important;max-width:420px!important;}
+  .share-cel-sub{font-size:.95rem!important;}
+}
+
 </style>
 </head>
 <body>
@@ -2681,7 +3090,7 @@ body.light-mode .share-plan-name {
 
 // ── CONFIG ──────────────────────────────────────────
 const SUPABASE_URL = 'https://lfazsvsabbnnahmlgnng.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_fMrGO6USLh1hAce8qrDNUg_fMq9_E9P';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmYXpzdnNhYmJubmFobWxnbm5nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2ODU1NzgsImV4cCI6MjA5NDI2MTU3OH0.hdw3HxRTfeL_3KHYJGVO3e00gyiBcr1OuNeem2aw3Ns';
 // ⬇ Configura tu URL de producción para que los links funcionen en otros dispositivos.
 // Ej: const SITE_URL = 'https://cuando-ten.vercel.app/';
 const SITE_URL = 'https://cuando-ten.vercel.app';
@@ -2833,9 +3242,16 @@ const t = k => C[lang][k];
 let db=null, isDB=false;
 try {
   const urlOk = SUPABASE_URL && !SUPABASE_URL.includes('YOUR') && SUPABASE_URL.startsWith('https://');
-  const keyOk = SUPABASE_KEY && !SUPABASE_KEY.includes('YOUR') && SUPABASE_KEY.length>20;
-  if (urlOk && keyOk) { db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY); isDB=true; }
-} catch(e) { console.warn('Supabase demo mode:',e); }
+  // Supabase anon key siempre empieza con eyJ (JWT). sb_publishable_ NO es válido.
+  const keyOk = SUPABASE_KEY && SUPABASE_KEY.startsWith('eyJ') && SUPABASE_KEY.length > 100;
+  if (urlOk && keyOk) {
+    db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    isDB = true;
+    console.log('✓ Supabase conectado:', SUPABASE_URL);
+  } else {
+    console.warn('⚠ Supabase desactivado. URL ok:', urlOk, '| Key ok (debe empezar con eyJ):', keyOk);
+  }
+} catch(e) { console.warn('Supabase error init:', e); }
 
 // ── BASE URL ─────────────────────────────────────────
 function base() {
@@ -2982,9 +3398,22 @@ function getR(){
   const m3=h.match(/^share\/(.+)$/); if(m3)return{v:'share',id:m3[1]};
   return{v:'home'};
 }
-function go(h){clearInterval(_ri);clearInterval(_pvLoop);location.hash=h;}
+function go(h){clearInterval(_ri);clearInterval(_pvLoop);if(!h||h===''||h==='/') window._createStep=0;location.hash=h;}
 window.addEventListener('hashchange',render);
-window.addEventListener('load',render);
+window.addEventListener('load',()=>{
+  render();
+  // Test Supabase connection silencioso al cargar
+  if(isDB){
+    db.from('plans').select('id').limit(1).then(({error})=>{
+      if(error){
+        console.warn('⚠ Supabase conectado pero con error en tabla plans:', error.message, '| Código:', error.code);
+        console.warn('  → Asegúrate que la tabla "plans" existe y tiene RLS permisivo para INSERT y SELECT.');
+      } else {
+        console.log('✓ Supabase OK — tabla plans accesible.');
+      }
+    });
+  }
+});
 
 // ── RENDER ───────────────────────────────────────────
 function render(){
@@ -2992,7 +3421,7 @@ function render(){
   const r=getR();
   if(r.v==='home'){resetTheme();setV(vHome());requestAnimationFrame(()=>{startPV();initReveal();});}
   else if(r.v==='create'){resetTheme();setV(vCreate());}
-  else if(r.v==='share'){setV(vShare(r.id));requestAnimationFrame(initReveal);}
+  else if(r.v==='share'){aV(()=>vShare(r.id));}
   else if(r.v==='respond')aV(()=>vRespond(r.id));
   else if(r.v==='results')aV(()=>vResults(r.id));
   else{resetTheme();setV(vHome());requestAnimationFrame(()=>{startPV();initReveal();});}
@@ -3002,7 +3431,7 @@ function setV(html){
   const isLoader=html.includes('loader-ring');
   const isHome=html.includes('hero-v2');
   document.getElementById('app').innerHTML=`<div class="page-enter ${isHome?'home-page':''}"><div class="view">${html}</div>${isLoader?'':siteFooter()}</div>`;
-  setTimeout(()=>{initNavState();hydrateNavIcon();applyColorMode(getColorMode(), false);},0);
+  setTimeout(()=>{initNavState();hydrateNavIcon();applyColorMode(getColorMode(), false);cleanUndefinedText();},0);
 }
 async function aV(fn){
   setV(`<div class="loader"><div class="loader-ring"></div><span>${t('loading')}</span></div>`);
@@ -3077,6 +3506,8 @@ function waShare(url,planTitle,creatorName){
 const I={
   wa:`<svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>`,
   chk:`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6.5L9 17.5 4 12.5"/></svg>`,
+  star:`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`,
+  zap:`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/></svg>`,
   plus:`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/></svg>`,
   clk:`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 7v5.25l3.5 2"/></svg>`,
   lnk:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>`,
@@ -3087,6 +3518,37 @@ const I={
   shr:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>`,
   grp:`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
 };
+
+
+function ico(key){
+  const val = (typeof I !== 'undefined' && I && typeof I[key] === 'string') ? I[key].trim() : '';
+  return val && val.startsWith('<svg') ? val : '';
+}
+function cleanUndefinedText(root=document){
+  try{
+    const walker=document.createTreeWalker(root.body||root, NodeFilter.SHOW_TEXT, null);
+    const nodes=[];
+    while(walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(n=>{
+      if(n.nodeValue && /\bundefined\b/i.test(n.nodeValue)){
+        n.nodeValue=n.nodeValue.replace(/\bundefined\b\s*/gi,'').trimStart();
+      }
+    });
+  }catch(e){ console.warn('cleanUndefinedText:', e); }
+}
+
+// REAL PATCH: keep accidental undefined text out of rendered UI
+(function watchUndefinedText(){
+  const boot=()=>{
+    try{ cleanUndefinedText(document); }catch(e){}
+    const target=document.getElementById('app')||document.body;
+    if(!target || window.__cuandoUndefinedObserver)return;
+    window.__cuandoUndefinedObserver=new MutationObserver(()=>cleanUndefinedText(document));
+    window.__cuandoUndefinedObserver.observe(target,{childList:true,subtree:true,characterData:true});
+  };
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot,{once:true});
+  else boot();
+})();
 
 
 // ── GLOBAL NAV + FOOTER ─────────────────────────────
@@ -3198,7 +3660,7 @@ function vHome(){
         <h1 class="hero-title-v2 s2">${copy.title}<span class="accent">${copy.accent}</span></h1>
         <p class="hero-desc-v2 s3">${copy.desc}</p>
         <div class="hero-actions-v2 s4">
-          <button class="btn-hero" id="main-cta" onclick="initCreate(event)">${I.clk} ${copy.cta} ${I.arr}</button>
+          <button class="btn-hero" id="main-cta" onclick="initCreate(event)">${ico('clk')} ${copy.cta} ${ico('arr')}</button>
         </div>
         <div class="hero-proof s5">
           <div class="proof-stack">
@@ -3274,7 +3736,7 @@ function vHome(){
   </div>
 
   <div style="padding:32px 20px 0;max-width:560px;margin:0 auto">
-    <button class="btn btn-primary reveal" onclick="initCreate(event)">${I.clk} ${t('cta')}</button>
+    <button class="btn btn-primary reveal" onclick="initCreate(event)">${ico('clk')} ${t('cta')}</button>
   </div>
   `;
 
@@ -3304,7 +3766,7 @@ function vCreate(){
     <div class="create-hero s1">
       <div class="create-hero-bg"></div>
       <div class="create-hero-content">
-        <div class="create-kicker">${I.zap} ${lang==='es'?'Nueva coordinación':'New plan'}</div>
+        <div class="create-kicker">${ico('zap')} ${lang==='es'?'Nueva coordinación':'New plan'}</div>
         <h1 class="create-title">${lang==='es'?'Crea tu plan':'Create your plan'}</h1>
         <p class="create-sub">${lang==='es'?'Listo en 30 segundos — sin cuentas':'Done in 30 seconds — no accounts'}</p>
       </div>
@@ -3331,7 +3793,7 @@ function vCreate(){
       <!-- STEP 0: Detalles -->
       <div class="create-panel active" id="cp-0">
         <div class="cp-head">
-          <div class="cp-icon">${I.grp}</div>
+          <div class="cp-icon">${ico('grp')}</div>
           <div>
             <div class="cp-title">${lang==='es'?'¿De qué trata el plan?':'What\'s the plan about?'}</div>
             <div class="cp-desc">${lang==='es'?'Un nombre claro ayuda a tu grupo a identificarlo.':'A clear name helps your group identify it.'}</div>
@@ -3340,7 +3802,7 @@ function vCreate(){
         <div class="create-field">
           <label class="cf-label">${lang==='es'?'Nombre del plan':'Plan name'}</label>
           <div class="cf-input-wrap">
-            <div class="cf-icon-left">${I.clk}</div>
+            <div class="cf-icon-left">${ico('clk')}</div>
             <input class="cf-input" type="text" id="plan-title" placeholder="${lang==='es'?'Ej: Cena · Fútbol · Cumpleaños':'E.g. Dinner · Soccer · Birthday'}" maxlength="80" autocomplete="off" oninput="validateStep0()">
             <div class="cf-char-count" id="title-count">0/80</div>
           </div>
@@ -3348,19 +3810,19 @@ function vCreate(){
         <div class="create-field">
           <label class="cf-label">${t('n_l')}</label>
           <div class="cf-input-wrap">
-            <div class="cf-icon-left">${I.grp}</div>
+            <div class="cf-icon-left">${ico('grp')}</div>
             <input class="cf-input" type="text" id="creator-name" placeholder="${lang==='es'?'Tu nombre o apodo':'Your name or nickname'}" maxlength="40" autocomplete="off" oninput="validateStep0()">
           </div>
         </div>
         <button class="btn btn-primary cp-next" id="cp-next-0" onclick="gotoStep(1)" disabled>
-          ${lang==='es'?'Continuar — agregar horarios':'Continue — add times'} ${I.arr}
+          ${lang==='es'?'Continuar — agregar horarios':'Continue — add times'} ${ico('arr')}
         </button>
       </div>
 
       <!-- STEP 1: Horarios -->
       <div class="create-panel" id="cp-1">
         <div class="cp-head">
-          <div class="cp-icon">${I.clk}</div>
+          <div class="cp-icon">${ico('clk')}</div>
           <div>
             <div class="cp-title">${lang==='es'?'¿Cuándo podrían ser?':'When could it be?'}</div>
             <div class="cp-desc">${lang==='es'?'Agrega 2 a 6 opciones de fecha y hora.':'Add 2 to 6 date and time options.'}</div>
@@ -3368,12 +3830,12 @@ function vCreate(){
         </div>
         <div id="slots-list">${_slots.map((s,k)=>slotHTML(s,k)).join('')}</div>
         <button class="add-slot-btn" id="add-slot-btn" onclick="addSlot()" ${_slots.length>=6?'disabled':''}>
-          ${I.plus} ${t('add')}
+          ${ico('plus')} ${t('add')}
         </button>
         <div class="cp-nav-row">
-          <button class="btn btn-outline cp-back" onclick="gotoStep(0)">${I.bk} ${lang==='es'?'Atrás':'Back'}</button>
+          <button class="btn btn-outline cp-back" onclick="gotoStep(0)">${ico('bk')} ${lang==='es'?'Atrás':'Back'}</button>
           <button class="btn btn-primary cp-next" id="cp-next-1" onclick="gotoStep(2)">
-            ${lang==='es'?'Continuar — elegir tema':'Continue — choose theme'} ${I.arr}
+            ${lang==='es'?'Continuar — elegir tema':'Continue — choose theme'} ${ico('arr')}
           </button>
         </div>
       </div>
@@ -3381,7 +3843,7 @@ function vCreate(){
       <!-- STEP 2: Tema -->
       <div class="create-panel" id="cp-2">
         <div class="cp-head">
-          <div class="cp-icon">${I.star}</div>
+          <div class="cp-icon">${ico('star')}</div>
           <div>
             <div class="cp-title">${lang==='es'?'Personaliza el look':'Personalize the look'}</div>
             <div class="cp-desc">${lang==='es'?'Elige un color que represente el plan.':'Choose a color that represents the plan.'}</div>
@@ -3396,9 +3858,9 @@ function vCreate(){
           </div>
         </div>
         <div class="cp-nav-row">
-          <button class="btn btn-outline cp-back" onclick="gotoStep(1)">${I.bk} ${lang==='es'?'Atrás':'Back'}</button>
+          <button class="btn btn-outline cp-back" onclick="gotoStep(1)">${ico('bk')} ${lang==='es'?'Atrás':'Back'}</button>
           <button class="btn btn-primary cp-next" id="gen-btn" onclick="createPlan(event)">
-            <span id="gen-btn-text">${I.arr} ${t('gen')}</span>
+            <span id="gen-btn-text">${ico('arr')} ${t('gen')}</span>
           </button>
         </div>
       </div>
@@ -3495,12 +3957,20 @@ async function createPlan(e){
   const errEl=document.getElementById('create-err');
   const genBtn=document.getElementById('gen-btn');
   if(errEl)errEl.innerHTML='';
-  const resetBtn=()=>{ if(genBtn){genBtn.innerHTML=`${I.arr} ${t('gen')}`;genBtn.disabled=false;} };
+  const resetBtn=()=>{ if(genBtn){genBtn.innerHTML=`${ico('arr')} ${t('gen')}`;genBtn.disabled=false;} };
   const showErr=(msg)=>{ if(errEl)errEl.innerHTML=`<div class="err-msg">⚠️ ${msg}</div>`; resetBtn(); haptic([30,50,30]); };
   if(!title||!creator){showErr(t('ef'));return;}
   const valid=_slots.filter(x=>x.date&&x.time);
   if(valid.length<2){showErr(t('eo'));return;}
-  if(!isDB){showErr('Supabase no está conectado. No se generó un link falso. Revisa SUPABASE_URL y SUPABASE_KEY.');return;}
+  if(!isDB){
+    const urlOk = SUPABASE_URL && !SUPABASE_URL.includes('YOUR') && SUPABASE_URL.startsWith('https://');
+    const keyOk = SUPABASE_KEY && SUPABASE_KEY.startsWith('eyJ') && SUPABASE_KEY.length > 100;
+    let hint = '';
+    if(!urlOk) hint += ' URL inválida.';
+    if(!keyOk) hint += ' La key debe ser un JWT (empieza con eyJ...). La key "sb_publishable_..." NO es válida, usa la anon/public key del proyecto.';
+    showErr('Supabase no conectado.' + hint);
+    return;
+  }
   if(genBtn){genBtn.innerHTML='<span class="btn-spinner"></span>';genBtn.disabled=true;}
   haptic(10);
   const themeId=_themeId||0;
@@ -3508,23 +3978,34 @@ async function createPlan(e){
   try{
     const{data,error}=await db.from('plans').insert(payload).select().single();
     if(error)throw error;
+    // Cache localmente para que vShare y vResults funcionen sin re-fetch
+    sessionStorage.setItem('p:'+data.id, JSON.stringify(data));
     _slots=[];
-    // El plan sí existe en Supabase; ahora los links públicos funcionarán en cualquier dispositivo.
     go('share/'+data.id);
   }catch(err){
-    console.error('No se pudo guardar el plan en Supabase:',err);
-    showErr('No se pudo guardar el plan en Supabase. No voy a crear un link demo porque ese link no abre en otros dispositivos. Revisa la tabla plans y las políticas RLS.');
+    console.error('Supabase error:', err);
+    // Mostrar el error real para poder diagnosticar
+    const detail = err?.message || err?.details || err?.hint || JSON.stringify(err) || 'Error desconocido';
+    const code   = err?.code   ? ` [${err.code}]` : '';
+    showErr(`Error al guardar: ${detail}${code}`);
   }
 }
 
 // ── VIEW: SHARE ──────────────────────────────────────
-function vShare(id){
+async function vShare(id){
   const planLink=`${base()}#plan/${id}`;
   const resultsLink=`${base()}#results/${id}`;
   const cached=sessionStorage.getItem('p:'+id);
-  const plan=cached?JSON.parse(cached):null;
+  let plan=cached?JSON.parse(cached):null;
+  // Si no está en caché (e.g. recarga de página) intentar fetch desde Supabase
+  if(!plan && isDB){
+    try{
+      const{data}=await db.from('plans').select('*').eq('id',id).single();
+      if(data){ plan=data; sessionStorage.setItem('p:'+id,JSON.stringify(data)); }
+    }catch(e){ console.warn('vShare fetch plan:', e); }
+  }
   if(plan?.theme_id!==undefined){_themeId=plan.theme_id;applyTheme(_themeId);}
-  megaConfetti();
+  // Share screen: no full-screen confetti; keep the hero clean and organized.
   const ti=plan?.title||'Plan', cr=plan?.creator_name||'';
   const thName=THEMES[_themeId]?.name||'Lime';
   const waMsg=lang==='es'
@@ -3535,21 +4016,11 @@ function vShare(id){
   const html=`
   ${nav()}
 
-  <!-- SHARE HERO — premium celebration -->
-  <div class="share-celebration s1">
-    <div class="share-cel-bg"></div>
-    <div class="share-cel-rings">
-      <div class="scr scr-1"></div>
-      <div class="scr scr-2"></div>
-      <div class="scr scr-3"></div>
-    </div>
-    <div class="share-cel-icon">
-      <div class="sci-inner">
-        <svg width="42" height="42" viewBox="0 0 24 24" fill="none">
-          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="var(--acc)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="var(--acc-dim)"/>
-          <circle cx="12" cy="12" r="6" stroke="var(--acc)" stroke-width=".8" stroke-dasharray="3 2" opacity=".5"/>
-        </svg>
-      </div>
+  <!-- SHARE HERO — clean premium celebration -->
+  <div class="share-celebration s1" aria-label="Plan creado">
+    <div class="share-cel-bg" aria-hidden="true"></div>
+    <div class="share-cel-icon" aria-hidden="true">
+      <div class="sci-inner">${ico('star')}</div>
     </div>
     <div class="share-cel-text">
       <h2 class="share-cel-title">${t('sh_t')}</h2>
@@ -3568,7 +4039,7 @@ function vShare(id){
     <!-- Link card -->
     <div class="share-card s2">
       <div class="share-card-head">
-        <div class="share-card-icon">${I.lnk}</div>
+        <div class="share-card-icon">${ico('lnk')}</div>
         <div class="share-card-title">${t('ll')}</div>
       </div>
       <div class="link-box">
@@ -3576,20 +4047,20 @@ function vShare(id){
         <button class="copy-btn" id="copy-plan" onclick="copyL('${planLink}','copy-plan')">${t('cp')}</button>
       </div>
       <div class="wa-preview">${waMsg.replace(/\n/g,'<br>').replace(/\*(.*?)\*/g,'<strong>$1</strong>')}</div>
-      <button class="btn btn-wa" onclick="${callWa(planLink,ti,cr)}">${I.wa} ${t('wa')}</button>
+      <button class="btn btn-wa" onclick="${callWa(planLink,ti,cr)}">${ico('wa')} ${t('wa')}</button>
     </div>
 
     <!-- Results card -->
     <div class="share-card s3">
       <div class="share-card-head">
-        <div class="share-card-icon">${I.star}</div>
+        <div class="share-card-icon">${ico('star')}</div>
         <div class="share-card-title">${t('rl')}</div>
       </div>
       <div class="link-box" style="margin-bottom:12px">
         <div class="link-text">${resultsLink}</div>
         <button class="copy-btn" id="copy-res" onclick="copyL('${resultsLink}','copy-res')">${t('cp')}</button>
       </div>
-      <button class="btn btn-primary" onclick="go('results/${id}')" style="margin-bottom:0">${I.arr} ${t('sr')}</button>
+      <button class="btn btn-primary" onclick="go('results/${id}')" style="margin-bottom:0">${ico('arr')} ${t('sr')}</button>
     </div>
 
     <button class="btn btn-ghost s4" onclick="initCreate(event)" style="margin-top:4px">${t('more')}</button>
@@ -3621,14 +4092,14 @@ async function vRespond(id){
     <div id="respond-err"></div>
     ${_plan.options.map((o,k)=>`
       <div class="opt-card s${Math.min(k+4,7)}" data-id="${o.id}" onclick="toggleOpt('${o.id}',this)">
-        <div class="opt-ring">${I.chk}</div>
+        <div class="opt-ring">${ico('chk')}</div>
         <div><div class="opt-label">${fmt(o.date,o.time)}</div></div>
       </div>`).join('')}
     <div class="inp-grp s${Math.min(_plan.options.length+4,7)+1}" style="margin-top:26px">
       <label>${t('n_l')}</label>
       <input type="text" id="responder-name" placeholder="${t('n_ph')}" maxlength="40" autocomplete="off">
     </div>
-    <button class="btn btn-primary" id="confirm-btn" onclick="submitResponse(event)">${I.chk} ${t('cf')}</button>
+    <button class="btn btn-primary" id="confirm-btn" onclick="submitResponse(event)">${ico('chk')} ${t('cf')}</button>
   </div>
   `;
   setTimeout(hydrateNavIcon,0);
@@ -3705,7 +4176,7 @@ async function vResults(id){
   const html=`
   ${nav()}
   <div class="results-shell">
-    <button class="back-btn" onclick="go('')">${I.bk} ${t('back')}</button>
+    <button class="back-btn" onclick="go('')">${ico('bk')} ${t('back')}</button>
 
     <section class="results-hero-card s1">
       <div class="results-topline">
@@ -3713,13 +4184,13 @@ async function vResults(id){
           <div class="theme-badge">✦ ${thName} Edition</div>
           <span class="live-pill">LIVE</span>
         </div>
-        <button class="refresh-mini" onclick="aV(()=>vResults('${id}'))">${I.ref} ${t('rf')}</button>
+        <button class="refresh-mini" onclick="aV(()=>vResults('${id}'))">${ico('ref')} ${t('rf')}</button>
       </div>
       <div class="results-title">${escHTML(_plan.title)}</div>
       <div class="results-sub"><strong style="color:var(--txt)">${responses.length}</strong> ${responseLabel} en vivo · ${escHTML(bestText)}</div>
       <div class="results-actions">
-        <button class="notify-btn" onclick="askNotify()">${I.bell} Notificarme cuando respondan</button>
-        <button class="notify-btn" onclick="copyL('${planLink}','copy-live-link')" id="copy-live-link">${I.lnk} Copiar link</button>
+        <button class="notify-btn" onclick="askNotify()">${ico('bell')} Notificarme cuando respondan</button>
+        <button class="notify-btn" onclick="copyL('${planLink}','copy-live-link')" id="copy-live-link">${ico('lnk')} Copiar link</button>
       </div>
     </section>
 
@@ -3728,7 +4199,7 @@ async function vResults(id){
         <div class="empty-live-icon">🕐</div>
         <div class="empty-live-title">Esperando respuestas</div>
         <div class="empty-live-text">Comparte el link y esta pantalla se actualizará sola cuando alguien responda.</div>
-        <button class="btn btn-wa" style="max-width:320px;margin:22px auto 0" onclick="${callWa(planLink,_plan.title||'',_plan.creator_name||'')}">${I.wa} ${t('wa')}</button>
+        <button class="btn btn-wa" style="max-width:320px;margin:22px auto 0" onclick="${callWa(planLink,_plan.title||'',_plan.creator_name||'')}">${ico('wa')} ${t('wa')}</button>
       </section>
     `:`
       <div class="results-live-row s2">
@@ -3755,7 +4226,7 @@ async function vResults(id){
     `}
 
     <div style="height:22px"></div>
-    <button class="btn btn-wa s4" onclick="${callWa(planLink,_plan.title||'',_plan.creator_name||'')}">${I.wa} ${t('sa')}</button>
+    <button class="btn btn-wa s4" onclick="${callWa(planLink,_plan.title||'',_plan.creator_name||'')}">${ico('wa')} ${t('sa')}</button>
     <button class="btn btn-outline s5" onclick="initCreate(event)">${t('more')}</button>
   </div>`;
   setTimeout(hydrateNavIcon,0);
