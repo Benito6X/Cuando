@@ -15,7 +15,75 @@
 <meta name="twitter:image" content="./img/og.jpg">
 <link rel="apple-touch-icon" href="./img/tropix.png">
 <title>CUÁNDO</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js">
+/* ── MEGA CONFETTI ─────────────────────────────────── */
+function megaConfetti(){
+  const c=document.getElementById('confetti-canvas');if(!c)return;
+  const ctx=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
+  const acc=getComputedStyle(document.documentElement).getPropertyValue('--acc').trim()||'#CBFF00';
+  const cols=[acc,'#FFFFFF','#00E28A','#FFB000','#A78BFA','#38BDF8','#FF4057','#FF9500'];
+  const shapes=['rect','circle','tri','diamond'];
+  const bursts=[
+    {x:innerWidth*.2, y:innerHeight*.35},
+    {x:innerWidth*.5, y:innerHeight*.28},
+    {x:innerWidth*.8, y:innerHeight*.35},
+    {x:innerWidth*.35,y:innerHeight*.5},
+    {x:innerWidth*.65,y:innerHeight*.5},
+  ];
+  const ps=[];
+  bursts.forEach(b=>{
+    for(let i=0;i<55;i++){
+      const angle=(Math.random()*360)*Math.PI/180,speed=Math.random()*14+5;
+      ps.push({
+        x:b.x,y:b.y,
+        vx:Math.cos(angle)*speed*(Math.random()+.4),
+        vy:Math.sin(angle)*speed-Math.random()*6-3,
+        w:Math.random()*10+4,h:Math.random()*15+6,
+        r:Math.random()*360,rs:(Math.random()-.5)*12,
+        g:.18+Math.random()*.18,
+        col:cols[Math.floor(Math.random()*cols.length)],
+        shape:shapes[Math.floor(Math.random()*shapes.length)],
+        life:1,decay:Math.random()*.009+.006
+      });
+    }
+  });
+  let raf;
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);let alive=false;
+    ps.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;p.vy+=p.g;p.vx*=.99;
+      p.r+=p.rs;p.life-=p.decay;
+      if(p.life<=0)return;alive=true;
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r*Math.PI/180);
+      ctx.fillStyle=p.col;ctx.globalAlpha=Math.max(0,p.life);
+      if(p.shape==='rect')ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      else if(p.shape==='circle'){ctx.beginPath();ctx.arc(0,0,p.w/2,0,Math.PI*2);ctx.fill();}
+      else if(p.shape==='tri'){ctx.beginPath();ctx.moveTo(0,-p.h/2);ctx.lineTo(p.w/2,p.h/2);ctx.lineTo(-p.w/2,p.h/2);ctx.closePath();ctx.fill();}
+      else{ctx.beginPath();ctx.moveTo(0,-p.h/2);ctx.lineTo(p.w/2,0);ctx.lineTo(0,p.h/2);ctx.lineTo(-p.w/2,0);ctx.closePath();ctx.fill();}
+      ctx.restore();
+    });
+    if(alive)raf=requestAnimationFrame(draw);
+    else ctx.clearRect(0,0,c.width,c.height);
+  }
+  // Staggered bursts
+  draw();
+  setTimeout(()=>{ 
+    for(let i=0;i<40;i++){
+      const angle=(Math.random()*360)*Math.PI/180,speed=Math.random()*10+4;
+      ps.push({x:innerWidth*.5,y:innerHeight*.2,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed-8,w:Math.random()*8+3,h:Math.random()*13+5,r:Math.random()*360,rs:(Math.random()-.5)*10,g:.2,col:cols[Math.floor(Math.random()*cols.length)],shape:'diamond',life:1,decay:.008});
+    }
+  }, 400);
+  setTimeout(()=>{cancelAnimationFrame(raf);ctx.clearRect(0,0,c.width,c.height);},7000);
+}
+
+/* Reset create step on go() */
+const _origGo = go;
+go = function(h) {
+  if(!h || h==='' || h==='/') window._createStep = 0;
+  _origGo(h);
+};
+
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
@@ -2240,6 +2308,363 @@ body.light-mode .phone-cta {
   .phone-screen { border-radius: 37px !important; padding: 52px 17px 20px !important; }
 }
 
+
+/* ═══════════════════════════════════════════════════
+   CUÁNDO — Create Plan v3 + Share v2 + Scroll
+════════════════════════════════════════════════════ */
+
+/* ── CREATE SHELL ─────────────────────────────────── */
+.create-shell {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 0 80px;
+}
+
+/* Create hero */
+.create-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 32px 24px 28px;
+  border-radius: 0 0 32px 32px;
+  background:
+    radial-gradient(circle at 60% -20%, var(--acc-glow), transparent 42%),
+    radial-gradient(circle at 10% 80%, rgba(0,226,138,.10), transparent 36%),
+    linear-gradient(180deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,.02) 100%);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  margin-bottom: 20px;
+}
+.create-hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: radial-gradient(ellipse at 50% 0%, black 20%, transparent 76%);
+}
+.create-hero-content { position: relative; z-index: 1; }
+.create-kicker {
+  display: inline-flex; align-items: center; gap: 7px;
+  color: var(--acc); font-size: .72rem; font-weight: 900;
+  letter-spacing: .14em; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.create-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(2.2rem, 8vw, 3.4rem);
+  font-weight: 900; line-height: .92; letter-spacing: -.06em;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #fff 0%, var(--acc) 55%, #fff 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.create-sub {
+  color: var(--txt2); font-size: .92rem; line-height: 1.5;
+  font-weight: 300;
+}
+
+/* Stepper */
+.create-stepper {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; padding: 0 24px 22px; position: relative;
+}
+.cs-step {
+  display: flex; flex-direction: column; align-items: center;
+  position: relative; flex: 1; max-width: 110px;
+}
+.cs-dot {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.05);
+  display: grid; place-items: center;
+  font-size: .78rem; font-weight: 900; color: var(--txt3);
+  transition: all .35s cubic-bezier(.34,1.56,.64,1);
+  position: relative; z-index: 2;
+}
+.cs-dot span { transition: opacity .2s; }
+.cs-dot .cs-check { position: absolute; opacity: 0; transition: opacity .2s; }
+.cs-step.active .cs-dot {
+  border-color: var(--acc);
+  background: var(--acc-dim);
+  color: var(--acc);
+  box-shadow: 0 0 0 4px var(--acc-dim), 0 0 20px var(--acc-glow2);
+  transform: scale(1.12);
+}
+.cs-step.done .cs-dot {
+  border-color: var(--grn);
+  background: var(--grn);
+  color: #07100a;
+  transform: scale(1.0);
+  box-shadow: 0 0 14px var(--grn-glow);
+}
+.cs-step.done .cs-dot span { opacity: 0; }
+.cs-step.done .cs-dot .cs-check { opacity: 1; color: #07100a; }
+.cs-label {
+  font-size: .68rem; font-weight: 700; color: var(--txt3);
+  letter-spacing: .06em; text-transform: uppercase;
+  margin-top: 7px; transition: color .25s;
+  text-align: center;
+}
+.cs-step.active .cs-label { color: var(--acc); }
+.cs-step.done .cs-label { color: var(--grn); }
+.cs-line {
+  position: absolute; top: 17px; left: calc(50% + 17px);
+  right: calc(-50% + 17px); height: 2px;
+  background: rgba(255,255,255,.10); border-radius: 999px;
+  overflow: hidden; z-index: 1;
+}
+.cs-line-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--grn), var(--acc));
+  border-radius: 999px;
+  transition: width .5s cubic-bezier(.22,1,.36,1);
+  box-shadow: 0 0 8px var(--grn-glow);
+}
+
+/* Body panels */
+.create-body { padding: 0 20px; }
+.create-panel {
+  display: none;
+  animation: cpPanelIn .38s cubic-bezier(.22,1,.36,1) both;
+}
+.create-panel.active { display: block; }
+@keyframes cpPanelIn {
+  from { opacity: 0; transform: translateY(22px) scale(.98); filter: blur(3px); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
+}
+
+/* Panel head */
+.cp-head {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 18px 20px; border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+  border: 1px solid rgba(255,255,255,.10);
+  margin-bottom: 18px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.07);
+}
+.cp-icon {
+  width: 42px; height: 42px; border-radius: 14px;
+  background: var(--acc); color: #080a12;
+  display: grid; place-items: center; flex-shrink: 0;
+  box-shadow: 0 0 22px var(--acc-glow);
+}
+.cp-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.cp-desc { font-size: .82rem; color: var(--txt2); line-height: 1.45; }
+
+/* Fields */
+.create-field { margin-bottom: 16px; }
+.cf-label {
+  display: block; font-size: .68rem; font-weight: 700;
+  color: var(--txt3); text-transform: uppercase;
+  letter-spacing: .12em; margin-bottom: 9px;
+}
+.cf-input-wrap {
+  position: relative;
+  display: flex; align-items: center;
+}
+.cf-icon-left {
+  position: absolute; left: 16px; top: 50%;
+  transform: translateY(-50%); color: var(--txt3);
+  pointer-events: none; z-index: 1;
+  display: flex; align-items: center;
+}
+.cf-input {
+  width: 100%; padding: 15px 52px 15px 46px;
+  border: 1.5px solid rgba(255,255,255,.13);
+  border-radius: 18px; font-size: .98rem; color: var(--txt);
+  background: rgba(255,255,255,.075); outline: none;
+  transition: border-color .18s, box-shadow .18s, background .18s;
+  font-family: 'DM Sans', sans-serif;
+  min-height: 54px;
+}
+.cf-input:focus {
+  border-color: var(--acc);
+  box-shadow: 0 0 0 4px var(--acc-dim);
+  background: rgba(255,255,255,.09);
+}
+.cf-input::placeholder { color: var(--mut); }
+.cf-char-count {
+  position: absolute; right: 14px; top: 50%;
+  transform: translateY(-50%);
+  font-size: .65rem; color: var(--txt3); font-weight: 600;
+  pointer-events: none;
+}
+
+/* Nav row */
+.cp-nav-row {
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 10px; margin-top: 18px;
+}
+.cp-nav-row .cp-back {
+  min-width: 100px; margin-bottom: 0;
+}
+.cp-nav-row .cp-next { margin-bottom: 0; }
+.cp-next { margin-top: 14px; margin-bottom: 0; }
+
+/* Preview pill */
+.create-preview-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px; border-radius: 14px;
+  background: rgba(255,255,255,.04);
+  border: 1px dashed rgba(255,255,255,.12);
+  margin: 14px 0;
+}
+.create-preview-label { font-size: .72rem; color: var(--txt3); font-weight: 700; white-space: nowrap; }
+.create-preview-pill {
+  display: flex; align-items: center; gap: 7px;
+  font-size: .78rem; color: var(--acc); font-weight: 600;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.cpill-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--acc); box-shadow: 0 0 8px var(--acc-glow);
+  flex-shrink: 0; animation: blink 1.8s ease infinite;
+}
+
+/* Light mode create */
+body.light-mode .create-hero {
+  background: radial-gradient(circle at 60% -20%, rgba(203,255,0,.22), transparent 42%),
+    linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.62));
+  border-bottom-color: rgba(8,10,18,.07);
+}
+body.light-mode .create-title {
+  background: linear-gradient(135deg, #080a12 0%, var(--acc) 55%, #080a12 100%);
+  -webkit-background-clip: text; background-clip: text;
+}
+body.light-mode .cp-head {
+  background: rgba(255,255,255,.88);
+  border-color: rgba(8,10,18,.08);
+}
+body.light-mode .cf-input {
+  background: #fff; border-color: rgba(8,10,18,.12);
+  color: #080a12;
+}
+body.light-mode .create-preview-row {
+  background: rgba(8,10,18,.04); border-color: rgba(8,10,18,.12);
+}
+
+/* ── SHARE CELEBRATION ────────────────────────────── */
+.share-celebration {
+  position: relative; overflow: hidden;
+  padding: 36px 24px 28px;
+  border-radius: 0 0 34px 34px;
+  margin-bottom: 20px;
+  background:
+    radial-gradient(circle at 50% -10%, var(--acc-glow), transparent 44%),
+    radial-gradient(circle at 20% 80%, rgba(0,226,138,.12), transparent 36%),
+    linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.02) 100%);
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  text-align: center;
+}
+.share-cel-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at 50% 0%, black 20%, transparent 75%);
+}
+.share-cel-rings {
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none;
+}
+.scr {
+  position: absolute; left: 50%; top: 42%;
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 50%;
+  border: 1px solid var(--acc);
+  animation: scrExpand 3s ease-in-out infinite;
+}
+.scr-1 { width: 80px; height: 80px; opacity: .35; animation-delay: 0s; }
+.scr-2 { width: 140px; height: 140px; opacity: .20; animation-delay: .6s; }
+.scr-3 { width: 200px; height: 200px; opacity: .10; animation-delay: 1.2s; }
+@keyframes scrExpand {
+  0%   { transform: translateX(-50%) translateY(-50%) scale(.6); opacity: .5; }
+  100% { transform: translateX(-50%) translateY(-50%) scale(1.4); opacity: 0; }
+}
+.share-cel-icon {
+  position: relative; z-index: 2;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 88px; height: 88px; border-radius: 28px;
+  background: radial-gradient(circle at 30% 25%, rgba(255,255,255,.22), transparent 45%),
+    linear-gradient(135deg, var(--acc-dim), rgba(255,255,255,.04));
+  border: 1px solid var(--bdr-glow);
+  box-shadow: 0 0 0 8px var(--acc-dim), 0 24px 60px var(--acc-glow2);
+  margin: 0 auto 20px;
+  animation: celebIn .7s cubic-bezier(.34,1.56,.64,1) both, sciBreath 4s ease-in-out 1s infinite;
+}
+@keyframes sciBreath {
+  0%,100% { box-shadow: 0 0 0 8px var(--acc-dim), 0 24px 60px var(--acc-glow2); }
+  50%      { box-shadow: 0 0 0 14px var(--acc-soft), 0 28px 80px var(--acc-glow); }
+}
+.sci-inner {
+  display: grid; place-items: center;
+  animation: sciRotate 8s linear infinite;
+}
+@keyframes sciRotate { to { transform: rotate(360deg); } }
+.share-cel-text { position: relative; z-index: 2; margin-bottom: 16px; }
+.share-cel-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  font-weight: 900; letter-spacing: -.05em;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #fff 0%, var(--acc) 55%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.share-cel-sub { color: var(--txt2); font-size: .95rem; line-height: 1.55; }
+.share-cel-meta {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; flex-wrap: wrap;
+}
+.share-plan-name {
+  font-size: .82rem; color: var(--txt2); font-weight: 600;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  padding: 5px 12px; border-radius: 999px;
+  max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* Share cards */
+.share-body { padding: 0 20px; }
+.share-card {
+  position: relative; overflow: hidden;
+  border-radius: 24px; padding: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.026));
+  border: 1px solid rgba(255,255,255,.11);
+  box-shadow: 0 18px 52px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.07);
+  margin-bottom: 12px;
+}
+.share-card-head {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px;
+}
+.share-card-icon {
+  width: 32px; height: 32px; border-radius: 10px;
+  background: var(--acc-dim); border: 1px solid var(--bdr-glow);
+  color: var(--acc); display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.share-card-title {
+  font-size: .72rem; font-weight: 700; color: var(--txt3);
+  text-transform: uppercase; letter-spacing: .10em;
+}
+body.light-mode .share-celebration {
+  background: radial-gradient(circle at 50% -10%, rgba(203,255,0,.28), transparent 44%),
+    linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.62));
+}
+body.light-mode .share-cel-title {
+  background: linear-gradient(135deg, #080a12 0%, var(--acc) 55%);
+  -webkit-background-clip: text; background-clip: text;
+}
+body.light-mode .share-card {
+  background: rgba(255,255,255,.88);
+  border-color: rgba(8,10,18,.08);
+  box-shadow: 0 16px 44px rgba(20,24,42,.09), inset 0 1px 0 #fff;
+}
+body.light-mode .share-plan-name {
+  background: rgba(8,10,18,.05); border-color: rgba(8,10,18,.08); color: var(--txt2);
+}
+
 </style>
 </head>
 <body>
@@ -2573,6 +2998,7 @@ function render(){
   else{resetTheme();setV(vHome());requestAnimationFrame(()=>{startPV();initReveal();});}
 }
 function setV(html){
+  window.scrollTo({top:0,behavior:'instant'});
   const isLoader=html.includes('loader-ring');
   const isHome=html.includes('hero-v2');
   document.getElementById('app').innerHTML=`<div class="page-enter ${isHome?'home-page':''}"><div class="view">${html}</div>${isLoader?'':siteFooter()}</div>`;
@@ -2684,7 +3110,7 @@ function siteFooter(){
   return `<footer class="cuando-footer">
     <div class="cuando-footer-inner">
       <div class="cuando-copy">© ${year} <strong>CUÁNDO</strong> — App social para decidir rápido.</div>
-      <div class="cuando-center">Sistema para coordinar planes con amigos</div>
+      <div class="cuando-center">Social scheduling OS</div>
       <a class="tropix-credit" href="https://www.instagram.com/tropix.studio" target="_blank" rel="noopener">
         <svg class="tropix-ig-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <defs><linearGradient id="ig-grad-cuando" x1="0" y1="24" x2="24" y2="0"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs>
@@ -2828,7 +3254,7 @@ function vHome(){
     <div class="visual-copy">
       <div class="visual-kicker">✦ App real, flujo real</div>
       <h2>${lang==='es'?'Del chat al mejor horario.':'From chat to the best time.'}</h2>
-      <p>${lang==='es'?'Crea un plan, comparte el link por WhatsApp y deja que todos voten su mejor hora. Sin cuentas, sin estrés y en segundos.':'Create a plan, share the link on WhatsApp, and let everyone vote for their best time. No accounts, no stress, in seconds.'}</p>
+      <p>${lang==='es'?'Las imágenes de /img se usan como apoyo visual para que la experiencia se sienta social, móvil y lista para compartir.':'The /img assets support the social, mobile, share-ready experience.'}</p>
     </div>
     <div class="visual-grid">
       <figure class="visual-card visual-wide"><img src="./img/lifestyle.jpg" alt="Amigos coordinando desde el móvil" loading="lazy"><figcaption>${lang==='es'?'Grupo coordinando':'Coordinating group'}</figcaption></figure>
@@ -2862,46 +3288,190 @@ function initCreate(e){if(e)ripple(e);haptic();_themeId=Number(localStorage.getI
 
 function vCreate(){
   if(!_slots.length)_slots=[{id:uid(),date:'',time:''},{id:uid(),date:'',time:''}];
+
+  /* Multi-step state: 0=info, 1=opciones, 2=tema */
+  if(typeof _createStep==='undefined') window._createStep=0;
+
+  const steps_es=['Detalles','Horarios','Tema'];
+  const steps_en=['Details','Times','Theme'];
+  const stepLabels=lang==='es'?steps_es:steps_en;
+
   const html=`
   ${nav()}
-  <div class="app-stage create-app">
-    <button class="back-btn app-back" onclick="go('')">${I.bk} ${t('back')}</button>
+  <div class="create-shell">
 
-    <section class="quest-card s1">
-      <div class="quest-content">
-        <div class="quest-kicker">⚡ Misión de coordinación</div>
-        <div class="quest-title">Crea el plan</div>
-        <div class="quest-sub">Arma una sala rápida, elige el tema y suelta el link al grupo. Sin cuentas. Sin fricción.</div>
-        <div class="quest-progress" aria-hidden="true">
-          <div class="quest-step on">Plan</div>
-          <div class="quest-step on">Opciones</div>
-          <div class="quest-step">Link</div>
+    <!-- HERO HEADER -->
+    <div class="create-hero s1">
+      <div class="create-hero-bg"></div>
+      <div class="create-hero-content">
+        <div class="create-kicker">${I.zap} ${lang==='es'?'Nueva coordinación':'New plan'}</div>
+        <h1 class="create-title">${lang==='es'?'Crea tu plan':'Create your plan'}</h1>
+        <p class="create-sub">${lang==='es'?'Listo en 30 segundos — sin cuentas':'Done in 30 seconds — no accounts'}</p>
+      </div>
+    </div>
+
+    <!-- STEPPER -->
+    <div class="create-stepper s2">
+      ${stepLabels.map((l,i)=>`
+        <div class="cs-step ${i===0?'active':''}" id="cs-step-${i}">
+          <div class="cs-dot">
+            <span>${i+1}</span>
+            <svg class="cs-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6.5L9 17.5 4 12.5"/></svg>
+          </div>
+          <div class="cs-label">${l}</div>
+          ${i<2?'<div class="cs-line"><div class="cs-line-fill"></div></div>':''}
+        </div>`).join('')}
+    </div>
+
+    <!-- STEP PANELS -->
+    <div class="create-body">
+      ${!isDB?`<div class="cfg-warn">${t('cfg')}</div>`:''}
+      <div id="create-err"></div>
+
+      <!-- STEP 0: Detalles -->
+      <div class="create-panel active" id="cp-0">
+        <div class="cp-head">
+          <div class="cp-icon">${I.grp}</div>
+          <div>
+            <div class="cp-title">${lang==='es'?'¿De qué trata el plan?':'What\'s the plan about?'}</div>
+            <div class="cp-desc">${lang==='es'?'Un nombre claro ayuda a tu grupo a identificarlo.':'A clear name helps your group identify it.'}</div>
+          </div>
+        </div>
+        <div class="create-field">
+          <label class="cf-label">${lang==='es'?'Nombre del plan':'Plan name'}</label>
+          <div class="cf-input-wrap">
+            <div class="cf-icon-left">${I.clk}</div>
+            <input class="cf-input" type="text" id="plan-title" placeholder="${lang==='es'?'Ej: Cena · Fútbol · Cumpleaños':'E.g. Dinner · Soccer · Birthday'}" maxlength="80" autocomplete="off" oninput="validateStep0()">
+            <div class="cf-char-count" id="title-count">0/80</div>
+          </div>
+        </div>
+        <div class="create-field">
+          <label class="cf-label">${t('n_l')}</label>
+          <div class="cf-input-wrap">
+            <div class="cf-icon-left">${I.grp}</div>
+            <input class="cf-input" type="text" id="creator-name" placeholder="${lang==='es'?'Tu nombre o apodo':'Your name or nickname'}" maxlength="40" autocomplete="off" oninput="validateStep0()">
+          </div>
+        </div>
+        <button class="btn btn-primary cp-next" id="cp-next-0" onclick="gotoStep(1)" disabled>
+          ${lang==='es'?'Continuar — agregar horarios':'Continue — add times'} ${I.arr}
+        </button>
+      </div>
+
+      <!-- STEP 1: Horarios -->
+      <div class="create-panel" id="cp-1">
+        <div class="cp-head">
+          <div class="cp-icon">${I.clk}</div>
+          <div>
+            <div class="cp-title">${lang==='es'?'¿Cuándo podrían ser?':'When could it be?'}</div>
+            <div class="cp-desc">${lang==='es'?'Agrega 2 a 6 opciones de fecha y hora.':'Add 2 to 6 date and time options.'}</div>
+          </div>
+        </div>
+        <div id="slots-list">${_slots.map((s,k)=>slotHTML(s,k)).join('')}</div>
+        <button class="add-slot-btn" id="add-slot-btn" onclick="addSlot()" ${_slots.length>=6?'disabled':''}>
+          ${I.plus} ${t('add')}
+        </button>
+        <div class="cp-nav-row">
+          <button class="btn btn-outline cp-back" onclick="gotoStep(0)">${I.bk} ${lang==='es'?'Atrás':'Back'}</button>
+          <button class="btn btn-primary cp-next" id="cp-next-1" onclick="gotoStep(2)">
+            ${lang==='es'?'Continuar — elegir tema':'Continue — choose theme'} ${I.arr}
+          </button>
         </div>
       </div>
-    </section>
 
-    <section class="mission-panel s2" style="margin-top:14px">
-      <div class="mission-content">
-        ${!isDB?`<div class="cfg-warn">${t('cfg')}</div>`:''}
-        <div id="create-err"></div>
-        <div class="input-card"><label>${t('p_l')}</label><input type="text" id="plan-title" placeholder="Ej: Cena este viernes" maxlength="80" autocomplete="off"></div>
-        <div class="input-card"><label>${t('n_l')}</label><input type="text" id="creator-name" placeholder="Tu nombre" maxlength="40" autocomplete="off"></div>
+      <!-- STEP 2: Tema -->
+      <div class="create-panel" id="cp-2">
+        <div class="cp-head">
+          <div class="cp-icon">${I.star}</div>
+          <div>
+            <div class="cp-title">${lang==='es'?'Personaliza el look':'Personalize the look'}</div>
+            <div class="cp-desc">${lang==='es'?'Elige un color que represente el plan.':'Choose a color that represents the plan.'}</div>
+          </div>
+        </div>
         ${themePickerHTML()}
-        <div class="inp-grp s4">
-          <label>${I.clk} ${t('o_l')}</label>
-          <div id="slots-list">${_slots.map((s,k)=>slotHTML(s,k)).join('')}</div>
-          <button class="add-slot-btn" id="add-slot-btn" onclick="addSlot()" ${_slots.length>=6?'disabled':''}>${I.plus} ${t('add')}</button>
+        <div class="create-preview-row">
+          <div class="create-preview-label">${lang==='es'?'Vista previa del link:':'Link preview:'}</div>
+          <div class="create-preview-pill">
+            <span class="cpill-dot"></span>
+            <span id="cpill-text">${lang==='es'?'cuando.app/plan/...':'cuando.app/plan/...'}</span>
+          </div>
+        </div>
+        <div class="cp-nav-row">
+          <button class="btn btn-outline cp-back" onclick="gotoStep(1)">${I.bk} ${lang==='es'?'Atrás':'Back'}</button>
+          <button class="btn btn-primary cp-next" id="gen-btn" onclick="createPlan(event)">
+            <span id="gen-btn-text">${I.arr} ${t('gen')}</span>
+          </button>
         </div>
       </div>
-    </section>
+    </div>
 
-    <div style="height:14px"></div>
-    <button class="btn btn-primary s5" id="gen-btn" onclick="createPlan(event)">${I.arr} ${t('gen')}</button>
   </div>
   `;
-  setTimeout(()=>{hydrateNavIcon();initNavState();},0);
+  setTimeout(()=>{
+    hydrateNavIcon();initNavState();
+    validateStep0();
+    initCreateInteractions();
+    // Restore step if needed
+    if(window._createStep && window._createStep>0) gotoStep(window._createStep, true);
+  },0);
   return html;
 }
+
+/* ── STEP NAVIGATION ──────────────────────────────── */
+function gotoStep(n, instant=false){
+  window._createStep = n;
+  const panels = document.querySelectorAll('.create-panel');
+  const steps  = document.querySelectorAll('.cs-step');
+  const lines  = document.querySelectorAll('.cs-line-fill');
+
+  panels.forEach((p,i)=>{
+    if(i===n){ p.classList.add('active'); }
+    else { p.classList.remove('active'); }
+  });
+  steps.forEach((s,i)=>{
+    s.classList.toggle('done',i<n);
+    s.classList.toggle('active',i===n);
+  });
+  lines.forEach((l,i)=>{ l.style.width=(i<n?'100%':'0%'); });
+
+  // Scroll panel to top
+  window.scrollTo({top:0, behavior: instant?'instant':'smooth'});
+
+  // Animate in
+  if(!instant){
+    const panel = document.getElementById('cp-'+n);
+    if(panel){
+      panel.style.animation='none';
+      panel.offsetHeight;
+      panel.style.animation='cpPanelIn .38s cubic-bezier(.22,1,.36,1) both';
+    }
+  }
+  haptic(10);
+}
+
+function validateStep0(){
+  const title = document.getElementById('plan-title');
+  const creator = document.getElementById('creator-name');
+  const btn = document.getElementById('cp-next-0');
+  const counter = document.getElementById('title-count');
+  if(title && counter) counter.textContent = title.value.length+'/80';
+  if(btn){
+    const ok = title?.value.trim().length>0 && creator?.value.trim().length>0;
+    btn.disabled = !ok;
+  }
+}
+
+function initCreateInteractions(){
+  // Title input: live preview pill
+  const titleInput = document.getElementById('plan-title');
+  const pillText = document.getElementById('cpill-text');
+  if(titleInput && pillText){
+    titleInput.addEventListener('input', ()=>{
+      const v = titleInput.value.trim();
+      pillText.textContent = v ? `cuando.app/plan/${v.toLowerCase().replace(/\s+/g,'-').slice(0,20)}...` : 'cuando.app/plan/...';
+    });
+  }
+}
+
 
 function slotHTML(s,k){
   return `<div class="slot" id="slot-${s.id}">
@@ -2954,7 +3524,7 @@ function vShare(id){
   const cached=sessionStorage.getItem('p:'+id);
   const plan=cached?JSON.parse(cached):null;
   if(plan?.theme_id!==undefined){_themeId=plan.theme_id;applyTheme(_themeId);}
-  setTimeout(()=>confetti(),300);
+  megaConfetti();
   const ti=plan?.title||'Plan', cr=plan?.creator_name||'';
   const thName=THEMES[_themeId]?.name||'Lime';
   const waMsg=lang==='es'
@@ -2964,32 +3534,65 @@ function vShare(id){
 
   const html=`
   ${nav()}
-  <div class="share-hero s1">
-    <div class="share-hero-bg"></div>
-    <div class="share-icon-wrap" style="position:relative;z-index:1">🎉</div>
-    <div class="pg-title" style="position:relative;z-index:1">${t('sh_t')}</div>
-    <div class="pg-sub" style="max-width:300px;margin:8px auto 0;position:relative;z-index:1">${t('sh_s')}</div>
-    <div style="display:flex;justify-content:center;margin-top:14px;position:relative;z-index:1">
+
+  <!-- SHARE HERO — premium celebration -->
+  <div class="share-celebration s1">
+    <div class="share-cel-bg"></div>
+    <div class="share-cel-rings">
+      <div class="scr scr-1"></div>
+      <div class="scr scr-2"></div>
+      <div class="scr scr-3"></div>
+    </div>
+    <div class="share-cel-icon">
+      <div class="sci-inner">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="var(--acc)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="var(--acc-dim)"/>
+          <circle cx="12" cy="12" r="6" stroke="var(--acc)" stroke-width=".8" stroke-dasharray="3 2" opacity=".5"/>
+        </svg>
+      </div>
+    </div>
+    <div class="share-cel-text">
+      <h2 class="share-cel-title">${t('sh_t')}</h2>
+      <p class="share-cel-sub">${t('sh_s')}</p>
+    </div>
+    <div class="share-cel-meta">
       <div class="theme-badge">✦ ${thName} Edition</div>
+      <div class="share-plan-name">${escHTML(ti)}</div>
     </div>
   </div>
-  <div class="sec">
+
+  <!-- SHARE CARDS -->
+  <div class="share-body">
     ${localWarn}
-    <div class="sec-label s2">${I.lnk} ${t('ll')}</div>
-    <div class="link-box s3">
-      <div class="link-text">${planLink}</div>
-      <button class="copy-btn" id="copy-plan" onclick="copyL('${planLink}','copy-plan')">${t('cp')}</button>
+
+    <!-- Link card -->
+    <div class="share-card s2">
+      <div class="share-card-head">
+        <div class="share-card-icon">${I.lnk}</div>
+        <div class="share-card-title">${t('ll')}</div>
+      </div>
+      <div class="link-box">
+        <div class="link-text">${planLink}</div>
+        <button class="copy-btn" id="copy-plan" onclick="copyL('${planLink}','copy-plan')">${t('cp')}</button>
+      </div>
+      <div class="wa-preview">${waMsg.replace(/\n/g,'<br>').replace(/\*(.*?)\*/g,'<strong>$1</strong>')}</div>
+      <button class="btn btn-wa" onclick="${callWa(planLink,ti,cr)}">${I.wa} ${t('wa')}</button>
     </div>
-    <div class="wa-preview s3">${waMsg.replace(/\n/g,'<br>').replace(/\*(.*?)\*/g,'<strong>$1</strong>')}</div>
-    <button class="btn btn-wa s4" onclick="${callWa(planLink,ti,cr)}" style="margin-bottom:14px">${I.wa} ${t('wa')}</button>
-    <div class="divider"></div>
-    <div class="sec-label">${t('rl')}</div>
-    <div class="link-box s5">
-      <div class="link-text">${resultsLink}</div>
-      <button class="copy-btn" id="copy-res" onclick="copyL('${resultsLink}','copy-res')">${t('cp')}</button>
+
+    <!-- Results card -->
+    <div class="share-card s3">
+      <div class="share-card-head">
+        <div class="share-card-icon">${I.star}</div>
+        <div class="share-card-title">${t('rl')}</div>
+      </div>
+      <div class="link-box" style="margin-bottom:12px">
+        <div class="link-text">${resultsLink}</div>
+        <button class="copy-btn" id="copy-res" onclick="copyL('${resultsLink}','copy-res')">${t('cp')}</button>
+      </div>
+      <button class="btn btn-primary" onclick="go('results/${id}')" style="margin-bottom:0">${I.arr} ${t('sr')}</button>
     </div>
-    <button class="btn btn-primary s6" onclick="go('results/${id}')" style="margin-bottom:10px">${I.arr} ${t('sr')}</button>
-    <button class="btn btn-ghost" onclick="initCreate(event)">${t('more')}</button>
+
+    <button class="btn btn-ghost s4" onclick="initCreate(event)" style="margin-top:4px">${t('more')}</button>
   </div>
   `;
   setTimeout(hydrateNavIcon,0);
